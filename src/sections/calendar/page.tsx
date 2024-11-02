@@ -1,5 +1,6 @@
 "use client";
 
+import Titles from "@/components/Titles";
 import { CalendarDays } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -33,11 +34,18 @@ const Calendar = () => {
     return () => clearInterval(timer);
   }, []);
 
+  const handleCalendarRedirect = () => {
+    window.open(
+      "https://calendar.google.com/calendar/u/0/r/eventedit?dates=20250201T000000Z/20250201T235959Z&text=Wedding+Party+of+Bekky+%26+Nicolas&details=Join+us+to+celebrate+the+love+of+Bekky+and+Nicolas.+Dress+code%3A+formal+attire+and+get+ready+for+a+night+of+dancing%2C+laughter%2C+and+unforgettable+memories.",
+      "_blank"
+    );
+  };
+
   return (
-    <section className="h-[50rem] bg-[#253924] flex flex-col items-center justify-center text-center">
+    <section className="h-[50rem] bg-primaryGreen flex flex-col items-center justify-center text-center">
       <div className="mx-[1rem]">
         <div>
-          <h1 className="font-[silk] text-5xl lg:text-7xl">Our Day</h1>
+          <Titles title="Our Day" />
           <p className="mt-5 text-xl">Saturday, February 1st, 2025</p>
         </div>
 
@@ -80,7 +88,10 @@ const Calendar = () => {
         </div>
 
         <div className="flex justify-center">
-          <button className="flex p-5 mt-40 text-black bg-white rounded-xl  hover:bg-[#F0EBE0] transition-all duration-300 font-semibold">
+          <button
+            className="flex px-5 py-3 mt-40 text-black bg-white rounded-xl  hover:bg-[#F0EBE0] transition-all duration-300 font-semibold"
+            onClick={handleCalendarRedirect}
+          >
             <CalendarDays className="mr-6 mt-[-3px]" />
             ADD TO CALENDAR
           </button>

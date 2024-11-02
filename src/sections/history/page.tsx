@@ -1,7 +1,7 @@
 const History = () => {
   return (
     <>
-      <section className="w-auto sm:h-[35rem] h-auto bg-[#F0EBE0]"> 
+      <section className="w-auto sm:h-[35rem] h-auto bg-[#F0EBE0]">
         <div className="flex flex-col items-center justify-center h-full gap-10 py-10 mx-10 text-sm text-center sm:text-xl text-primary font-[silk]">
           <p className="">
             Dear all, <br /> Our love story began in 2018, with no idea we would
