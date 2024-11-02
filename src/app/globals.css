@@ -7,6 +7,21 @@
   --foreground: #171717;
 }
 
+@font-face {
+  font-family: "Silk";
+  src: url(../app/fonts/SilkSerif-Regular.ttf);
+}
+
+@font-face {
+  font-family: "Destiny";
+  src: url(../app/fonts/The\ Destiny.ttf);
+}
+
+@font-face {
+  font-family: "Cormorant";
+  src: url(../app/fonts/Cormorant-Regular.ttf);
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -14,8 +29,14 @@
   }
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 300; 
 }

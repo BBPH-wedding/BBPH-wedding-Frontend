@@ -1,0 +1,93 @@
+"use client";
+
+import { CalendarDays } from "lucide-react";
+import { useState, useEffect } from "react";
+
+const Calendar = () => {
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
+  useEffect(() => {
+    const calculateTimeLeft = () => {
+      const targetDate = new Date("2025-02-01T00:00:00-05:00");
+      const now = new Date();
+      const difference = targetDate.getTime() - now.getTime();
+
+      if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((difference / 1000 / 60) % 60);
+        const seconds = Math.floor((difference / 1000) % 60);
+
+        setTimeLeft({ days, hours, minutes, seconds });
+      }
+    };
+
+    calculateTimeLeft();
+    const timer = setInterval(calculateTimeLeft, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <section className="h-[50rem] bg-[#253924] flex flex-col items-center justify-center text-center">
+      <div className="mx-[1rem]">
+        <div>
+          <h1 className="font-[silk] text-5xl lg:text-7xl">Our Day</h1>
+          <p className="mt-5 text-xl">Saturday, February 1st, 2025</p>
+        </div>
+
+        <div className="flex gap-x-[5vw] mt-28 lg:gap-x-[11vw] sm:flex-nowrap flex-wrap justify-center ml-[4.5vw]">
+          <div>
+            <h2 className="font-[cormorant] text-6xl lg:text-8xl">
+              {timeLeft.days.toString().padStart(2, "0")}
+            </h2>
+            <p className="text-[10px] tracking-[0.5rem] mt-4 lg:text-xl sm:text-sm">
+              DAYS
+            </p>
+          </div>
+
+          <div>
+            <h2 className="font-[cormorant] text-6xl lg:text-8xl">
+              {timeLeft.hours.toString().padStart(2, "0")}
+            </h2>
+            <p className="text-[10px] sm:text-sm lg:text-xl tracking-[0.5rem] mt-4">
+              HOURS
+            </p>
+          </div>
+
+          <div>
+            <h2 className="font-[cormorant] text-6xl lg:text-8xl">
+              {timeLeft.minutes.toString().padStart(2, "0")}
+            </h2>
+            <p className="text-[10px] sm:text-sm lg:text-xl tracking-[0.5rem] mt-4">
+              MINUTES
+            </p>
+          </div>
+
+          <div>
+            <h2 className="font-[cormorant] text-6xl lg:text-8xl">
+              {timeLeft.seconds.toString().padStart(2, "0")}
+            </h2>
+            <p className="text-[10px] sm:text-sm lg:text-xl tracking-[0.5rem] mt-4">
+              SECONDS
+            </p>
+          </div>
+        </div>
+
+        <div className="flex justify-center">
+          <button className="flex p-5 mt-40 text-black bg-white rounded-xl  hover:bg-[#F0EBE0] transition-all duration-300 font-semibold">
+            <CalendarDays className="mr-6 mt-[-3px]" />
+            ADD TO CALENDAR
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Calendar;
