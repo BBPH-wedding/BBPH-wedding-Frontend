@@ -1,5 +1,6 @@
 "use client";
 
+import Button from "@/components/Button";
 import Titles from "@/components/Titles";
 import { CalendarDays } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -42,7 +43,7 @@ const Calendar = () => {
   };
 
   return (
-    <section className="h-[50rem] bg-primaryGreen flex flex-col items-center justify-center text-center">
+    <section className="flex flex-col items-center justify-center h-auto py-24 text-center bg-primaryGreen">
       <div className="mx-[1rem]">
         <div>
           <Titles title="Our Day" />
@@ -88,13 +89,10 @@ const Calendar = () => {
         </div>
 
         <div className="flex justify-center">
-          <button
-            className="flex px-5 py-3 mt-40 text-black bg-white rounded-xl  hover:bg-[#F0EBE0] transition-all duration-300 font-semibold"
-            onClick={handleCalendarRedirect}
-          >
+          <Button onClick={handleCalendarRedirect}>
             <CalendarDays className="mr-6 mt-[-3px]" />
             ADD TO CALENDAR
-          </button>
+          </Button>
         </div>
       </div>
     </section>
