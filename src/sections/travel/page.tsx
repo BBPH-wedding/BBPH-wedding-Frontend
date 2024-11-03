@@ -7,6 +7,7 @@ const Travel = () => {
     <>
       <section className="w-auto pb-14 sm:pb-32 h-auto bg-[#F0EBE0] px-5">
         <div className="flex flex-col items-center justify-center w-full h-full">
+          
           <div className="mb-14">
             <Titles
               title="Travel Recommendations"
