@@ -47,7 +47,7 @@ const Calendar = () => {
       <div className="mx-[1rem]">
         <div>
           <Titles title="Our Day" />
-          <p className="mt-5 text-xl">Saturday, February 1st, 2025</p>
+          <p className="mt-5 text-sm md:text-xl">Saturday, February 1st, 2025</p>
         </div>
 
         <div className="flex gap-x-[5vw] mt-28 lg:gap-x-[11vw] sm:flex-nowrap flex-wrap justify-center ml-[4.5vw]">
@@ -88,7 +88,7 @@ const Calendar = () => {
           </div>
         </div>
 
-        <div className="flex justify-center">
+        <div className="flex justify-center mt-[5rem] md:mt-[10rem]">
           <Button onClick={handleCalendarRedirect}>
             <CalendarDays className="mr-6 mt-[-3px]" />
             ADD TO CALENDAR

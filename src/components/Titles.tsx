@@ -8,7 +8,7 @@ const Titles: React.FC<TitleWithContentProps> = ({ title, color, size = 'large' 
     
     const sizeClasses = {
       small: 'text-2xl lg:text-3xl',
-      large: 'text-5xl lg:text-7xl',
+      large: 'text-4xl lg:text-7xl',
     };
   
     return (
