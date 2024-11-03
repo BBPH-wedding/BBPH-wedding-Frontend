@@ -44,8 +44,8 @@ const Itinerary = () => {
       </div>
 
       {events.map((event, index) => (
-        <div key={index} className="relative">
-          <ContainerText w="w-auto md:min-w-[50vw]" h="h-dhv">
+        <div key={index}>
+          <ContainerText w="w-auto md:min-w-[50vw] z-1" h="h-dhv">
             <div className="mx-7 my-7">
               <div>
                 <Titles
