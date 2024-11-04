@@ -1,4 +1,3 @@
-import Button from "@/components/Button";
 import ContainerText from "@/components/ContainerText";
 import Titles from "@/components/Titles";
 
