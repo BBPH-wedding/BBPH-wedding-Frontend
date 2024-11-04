@@ -20,7 +20,7 @@ const Hotel = () => {
         </div>
 
         <ContainerText
-          w="w-auto md:min-w-[60vw] z-1 md:text-lg text-sm text-center"
+          w="w-auto md:min-w-[60vw] md:text-lg text-sm text-center"
           h="h-dhv"
         >
           <div className="mx-10 my-10 md:my-20">

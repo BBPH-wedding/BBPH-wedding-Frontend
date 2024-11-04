@@ -30,7 +30,7 @@ const Navbar = () => {
   return (
     <>
       <nav className={`flex items-center justify-between h-24 px-[3vw] pt-4 fixed w-dvw top-0 transition-all duration-700 ${
-          showBackground ? "bg-black/30 backdrop-blur-sm" : "bg-transparent"
+          showBackground ? "bg-black/30 backdrop-blur-sm z-50" : "bg-transparent"
         }`}>
         <div className="z-30">
           <Names
