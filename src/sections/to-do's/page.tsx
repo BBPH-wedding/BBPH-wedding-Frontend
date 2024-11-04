@@ -71,7 +71,7 @@ const ToDos = () => {
                       width={1000}
                       height={1000}
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      quality={1000}
+                      quality={100}
                     />
                   </div>
 
