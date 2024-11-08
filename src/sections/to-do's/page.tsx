@@ -106,7 +106,3 @@ const ToDos = () => {
 };
 
 export default ToDos;
-
-// shopping
-// restaurants and bars
-// nigthlife
