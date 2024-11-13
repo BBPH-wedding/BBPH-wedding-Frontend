@@ -13,6 +13,19 @@ import { useState } from "react";
 import SecondModal from "./SecondModal";
 import ThirdModal from "./ThirdModal";
 import { postReservation } from "@/hooks/CreateReservation";
+import toast, { Toaster } from "react-hot-toast";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
+
+const validationSchema = Yup.object().shape({
+  email: Yup.string()
+    .email("Por favor ingresa un email válido")
+    .required("El email es requerido"),
+  password: Yup.string()
+    .min(8, "La contraseña debe tener al menos 8 caracteres")
+    .required("La contraseña es requerida"),
+});
 
 const Modal = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -20,33 +33,40 @@ const Modal = () => {
   const [isThirdModalOpen, setIsThirdModalOpen] = useState(false);
 
   const handleConfirm = () => {
-    setIsThirdModalOpen((prevState) => !prevState); // abre el tercer modal
-    setIsCodeModalOpen(false); // cierra el segundo modal
+    setIsThirdModalOpen((prevState) => !prevState);
+    setIsCodeModalOpen(false);
   };
 
-  const handleSendReservation = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(e);
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema,
+    onSubmit: async (values, { setSubmitting }) => {
+      try {
+        const data = await postReservation(values);
 
-    const formData = new FormData(e.currentTarget);
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
+        if (!data) {
+          return;
+        }
 
-    try {
-      const data = await postReservation({
-        email,
-        password,
-      });
-      setIsAuthModalOpen(false); 
-      setIsCodeModalOpen(true); 
-      console.log(data);
-    } catch {
-      console.error("Error al enviar la reserva:");
-    }
-  };
-
+        toast.success("Reservation created successfully");
+        setIsAuthModalOpen(false);
+        setIsCodeModalOpen(true);
+      } catch (error) {
+        if (process.env.NODE_ENV === "development") {
+          console.warn("Error in handleReservation:", error);
+        }
+        toast.error("Error to send reservation");
+      } finally {
+        setSubmitting(false);
+      }
+    },
+  });
   return (
     <>
+      <Toaster />
       <Dialog open={isAuthModalOpen} onOpenChange={setIsAuthModalOpen}>
         <DialogTrigger asChild>
           <Button className="w-full" onClick={() => setIsAuthModalOpen(true)}>
@@ -65,19 +85,30 @@ const Modal = () => {
               reservation.
             </DialogDescription>
           </DialogHeader>
-
-          <form className="space-y-10" onSubmit={handleSendReservation}>
+          <form 
+            className="space-y-10" 
+            onSubmit={formik.handleSubmit}
+          >
             <div>
               <label className="block mb-3 text-sm font-semibold text-black md:text-xl">
                 Email
               </label>
               <input
                 type="email"
-                name="email"
-                required
+           
                 placeholder="Enter your email"
-                className="w-full p-5 bg-white/70 focus:outline-none"
+                className={`w-full p-5 bg-white/70 focus:outline-none ${
+                  formik.touched.email && formik.errors.email 
+                    ? 'border-2 border-red-500' 
+                    : ''
+                }`}
+                {...formik.getFieldProps('email')}
               />
+              {formik.touched.email && formik.errors.email && (
+                <div className="mt-2 text-sm text-red-600">
+                  {formik.errors.email}
+                </div>
+              )}
             </div>
 
             <div>
@@ -86,15 +117,28 @@ const Modal = () => {
               </label>
               <input
                 type="password"
-                name="password"
-                required
+         
                 placeholder="Enter your password"
-                className="w-full p-5 bg-white/70 focus:outline-none"
+                className={`w-full p-5 bg-white/70 focus:outline-none ${
+                  formik.touched.password && formik.errors.password 
+                    ? 'border-2 border-red-500' 
+                    : ''
+                }`}
+                {...formik.getFieldProps('password')}
               />
+              {formik.touched.password && formik.errors.password && (
+                <div className="mt-2 text-sm text-red-600">
+                  {formik.errors.password}
+                </div>
+              )}
             </div>
 
-            <Button type="submit" className="w-full md:w-full hover:bg-white">
-              RESERVE NOW
+            <Button 
+              type="submit" 
+              className="w-full md:w-full hover:bg-white disabled:cursor-not-allowed"
+              disabled={formik.isSubmitting || Object.keys(formik.errors).length > 0}
+            >
+              {formik.isSubmitting ? 'RESERVING...' : 'RESERVE NOW'}
             </Button>
           </form>
         </DialogContent>

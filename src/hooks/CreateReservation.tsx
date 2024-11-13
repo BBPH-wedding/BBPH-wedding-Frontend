@@ -16,22 +16,21 @@ export const postReservation = async ({
           email,
           password,
         }),
-
         headers: {
           "Content-Type": "application/json",
         },
-    
       }
     );
 
     if (!response.ok) {
-      console.error("Error al enviar la reserva:", response.statusText);
-      return null;
+      throw new Error(`Error en la solicitud: ${response.status}`);
     }
-    const data = await response.json();
+    const data = await response.text();
     return data;
   } catch (error) {
-    console.error("Error general:", error);
+    if (process.env.NODE_ENV === "development") {
+      console.warn("Error in postReservation:", error);
+    }
     return null;
   }
 };

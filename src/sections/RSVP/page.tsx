@@ -1,11 +1,11 @@
 import Button from "@/components/Button";
-import Modal from "@/components/FirstModal";
+// import Modal from "@/components/FirstModal";
 import Titles from "@/components/Titles";
 
 const RSVP = () => {
   return (
     <>
-      <section className="flex flex-col items-center justify-center h-auto py-24 text-center bg-primaryGreen px-10">
+      <section className="flex flex-col items-center justify-center h-auto px-10 py-24 text-center bg-primaryGreen">
         <div>
           <Titles title="RSVP" color="text-white" size="large" />
           <p className="mt-10 text-sm md:text-xl">
@@ -14,8 +14,8 @@ const RSVP = () => {
           </p>
         </div>
 
-        <div className="mt-10 flex flex-col justify-center">
-          <p className="text-sm md:text-lg max-w-lg md:max-w-5xl mx-auto">
+        <div className="flex flex-col justify-center mt-10">
+          <p className="max-w-lg mx-auto text-sm md:text-lg md:max-w-5xl">
             Please use this form to confirm your attendance at the event. If you
             have not yet made a reservation, select the &quot;Reserve&quot;
             button to register. If you have already made a reservation but need
@@ -24,9 +24,8 @@ const RSVP = () => {
           </p>
 
           <div className="flex flex-wrap justify-center w-full mt-16 gap-7 md:mt-20 md:gap-20">
-          
-              <Modal />
-        
+            {/* <Modal /> */}
+            <Button className="w-full">Reserve</Button>
             <Button className="w-full">Edit Reservation</Button>
           </div>
         </div>
