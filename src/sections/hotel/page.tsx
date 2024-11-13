@@ -12,7 +12,7 @@ const Hotel = () => {
             and to the airport. <br /> For the wedding ceremony there will be
             shuttles going out of the following hotels at 15h on february 01
           </p>
-          <p className="text-sm text-center mt-14 md:text-lg text-primary/70 font-semibold">
+          <p className="text-sm font-semibold text-center mt-14 md:text-lg text-primary/70">
             El Cielo Hotel Medellin, The Click Clack Hotel Medellin, Hotel
             Estelar Medellin Square
           </p>
@@ -32,14 +32,14 @@ const Hotel = () => {
               <div className="flex flex-col gap-1 mt-5 text-primary/70">
                 <p>
                   Ubers work well to get around town and for airport pick up.
-                  <br /> To coordinate your transportation in advance, here s a
+                  <br /> To coordinate your transportation in advance, here&qoute;s a
                   company of trusted drivers you can contact:
                 </p>
-                <p className="font-semibold mt-5">
+                <p className="mt-5 font-semibold">
                   EC Transportes SAS / Raúl Vasquez <br />
                   +57 (3113435428)
                 </p>
-                <p className="italic text-sm">
+                <p className="text-sm italic">
                   *Important safety note: picking up taxis from the street is
                   not advised, especially late at night*
                 </p>
@@ -53,7 +53,7 @@ const Hotel = () => {
                 size="small"
               />
               <div className="flex flex-col gap-1 mt-5 text-primary/70">
-                <p className="font-semibold mt-5">
+                <p className="mt-5 font-semibold">
                   Portada Peluquería Medellín <br />
                   <span className="font-normal">
                     Centro Comercial Vizcaya. Local 148. El Poblado, Medellín
@@ -61,7 +61,7 @@ const Hotel = () => {
                   </span>
                 </p>
 
-                <p className="font-semibold mt-5">
+                <p className="mt-5 font-semibold">
                   Claudia Londoño Peluquería <br />
                   <span className="font-normal">
                     Centro Comercial Río Sur, Cra 43ª #6Sur-26. El Poblado,
@@ -69,7 +69,7 @@ const Hotel = () => {
                   </span>
                 </p>
 
-                <p className="font-semibold mt-5">
+                <p className="mt-5 font-semibold">
                   Livana Salóm
                   <br />
                   <span className="font-normal">
@@ -86,19 +86,19 @@ const Hotel = () => {
                 size="small"
               />
               <div className="flex flex-col gap-1 mt-5 text-primary/70">
-                <p className="font-semibold mt-5">
+                <p className="mt-5 font-semibold">
                   Diana López Makeup Studio <br />
                   <span className="font-normal">
                     Calle 10B #36-20. El Poblado, Medellín (+57) 314 8844442
                   </span>
                 </p>
 
-                <p className="font-semibold mt-5">
+                <p className="mt-5 font-semibold">
                   Grehisizi Makeup <br />
                   <span className="font-normal">(+57) 302 5921522</span>
                 </p>
 
-                <p className="font-semibold mt-5">
+                <p className="mt-5 font-semibold">
                   Zareth Makeup Studio
                   <br />
                   <span className="font-normal">

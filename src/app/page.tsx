@@ -13,15 +13,33 @@ export default function Home() {
   return (
     <>
       <Navbar />
+
       <Hero />
-      <History />
-      {/* <Calendar />
-      <Itinerary/>
-      <Travel/>
-      <Hotel/>
-      <ToDos/> */}
-      <RSVP/>
-      {/* <FAQs/> */}
+
+      <section id="history">
+        <History />
+      </section>
+      {/* <section id="calendar">
+        <Calendar />
+      </section>
+      <section id="itinerary">
+        <Itinerary />
+      </section>
+      <section id="travel">
+        <Travel />
+      </section>
+      <section id="recommendations">
+        <Hotel />
+      </section> */}
+      {/* <section id="things-to-do">
+        <ToDos />
+      </section> */}
+      <section id="rsvp">
+        <RSVP />
+      </section>
+      {/* <section id="faqs">
+        <FAQs />
+      </section> */}
     </>
   );
 }
