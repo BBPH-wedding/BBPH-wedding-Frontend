@@ -46,7 +46,7 @@ interface CodeModalState {
 }
 
 export const useCodeModalStore = create<CodeModalState>((set) => ({
-  isCodeModalOpen: true,
+  isCodeModalOpen: false,
   setIsCodeModalOpen: (isOpen) => set({ isCodeModalOpen: isOpen }),
 }));
 
