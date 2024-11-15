@@ -17,6 +17,7 @@ const navItems: NavItem[] = [
   { id: "things-to-do", label: "Things to do" },
   { id: "rsvp", label: "RSVP" },
   { id: "faqs", label: "FAQS" },
+  { id: "gallery", label: "Gallery" },
 ];
 
 const Navbar = () => {
@@ -85,13 +86,13 @@ const Navbar = () => {
       </div>
 
       <div>
-        <ul className="items-center hidden text-sm xl:text-lg gap-x-[2vw] text-primary lg:flex">
+        <ul className="items-center hidden text-sm xl:text-lg gap-x-[2vw] text-white/65 lg:flex">
           {navItems.map((item) => (
             <li key={item.id}>
               <button
                 onClick={() => scrollToSection(item.id)}
                 className={`transition-colors duration-300 hover:text-gray-300 ${
-                  activeSection === item.id ? "text-green-800" : ""
+                  activeSection === item.id ? "text-green-900" : ""
                 }`}
               >
                 {item.label}
@@ -136,13 +137,13 @@ const Navbar = () => {
           <div className="w-[94%] border-white border" />
         </div>
         <div className="flex items-center h-full ml-12 mt-11">
-          <ul className="flex flex-col text-lg text-primary gap-y-5">
+          <ul className="flex flex-col text-lg text-white/65 gap-y-5">
             {navItems.map((item) => (
               <li key={item.id}>
                 <button
                   onClick={() => scrollToSection(item.id)}
                   className={`transition-colors duration-300 hover:text-gray-300 ${
-                    activeSection === item.id ? "text-yellow-400" : ""
+                    activeSection === item.id ? "text-green-900" : ""
                   }`}
                 >
                   {item.label}

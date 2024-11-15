@@ -1,5 +1,8 @@
+import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Calendar from "@/sections/calendar/page";
+import FAQs from "@/sections/faqs/page";
+import Gallery from "@/sections/gallery/page";
 import Hero from "@/sections/hero/page";
 import History from "@/sections/history/page";
 import Hotel from "@/sections/hotel/page";
@@ -12,13 +15,11 @@ export default function Home() {
   return (
     <>
       <Navbar />
-
       <Hero />
-
       <section id="history">
         <History />
       </section>
-       <section id="calendar">
+      <section id="calendar">
         <Calendar />
       </section>
       <section id="itinerary">
@@ -36,6 +37,13 @@ export default function Home() {
       <section id="rsvp">
         <RSVP />
       </section>
+      <section id="faqs">
+        <FAQs />
+      </section>
+      <section id="gallery">
+        <Gallery />
+      </section>
+      <Footer/>
     </>
   );
 }

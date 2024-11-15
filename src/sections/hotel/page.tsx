@@ -32,7 +32,7 @@ const Hotel = () => {
               <div className="flex flex-col gap-1 mt-5 text-primary/70">
                 <p>
                   Ubers work well to get around town and for airport pick up.
-                  <br /> To coordinate your transportation in advance, here&qoute;s a
+                  <br /> To coordinate your transportation in advance,  here&apos;s a
                   company of trusted drivers you can contact:
                 </p>
                 <p className="mt-5 font-semibold">

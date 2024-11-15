@@ -55,7 +55,7 @@ const ToDos = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 gap-8 px-4 mx-auto md:grid-cols-2 lg:grid-cols-3 max-w-7xl">
           {category.map((category, index) => (
             <div key={index} className="flex flex-col group">
               <Link
@@ -63,20 +63,20 @@ const ToDos = () => {
                 className="block h-full"
                 target="_blank"
               >
-                <div className="bg-white rounded-lg shadow-lg group-hover:shadow-xl transition-all duration-300 overflow-hidden h-full ">
+                <div className="h-full overflow-hidden transition-all duration-300 bg-white rounded-lg shadow-lg group-hover:shadow-xl ">
                   <div className="relative w-full h-48">
                     <Image
                       src={category.img}
                       alt={category.title}
                       width={1000}
                       height={1000}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
                       quality={100}
                     />
                   </div>
 
                   <div className="p-6 space-y-3">
-                    <h2 className="text-xl font-bold text-primaryGreen mb-2 line-clamp-1">
+                    <h2 className="mb-2 text-xl font-bold text-primaryGreen line-clamp-1">
                       {category.title}
                     </h2>
                     <p className="text-sm text-primary/70 line-clamp-3">
@@ -97,7 +97,7 @@ const ToDos = () => {
             best of the city in a practical and detailed way.
           </p>
           <div className="flex justify-center mt-10 md:mt-16">
-            <Button className="w-full">DOWNLOAD PDF</Button>
+            <Button className="w-full hover:!bg-white">DOWNLOAD PDF</Button> 
           </div>
         </div>
       </section>
