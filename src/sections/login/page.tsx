@@ -1,4 +1,3 @@
-import Names from "@/components/Names";
 
 const Login = () => {
   return (

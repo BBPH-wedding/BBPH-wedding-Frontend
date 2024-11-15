@@ -16,7 +16,7 @@ import {
   useReservationStore,
   useTokenStore,
 } from "@/store/Store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const validationSchema = Yup.object().shape({
   confirmationToken: Yup.string()
@@ -38,6 +38,7 @@ const SecondModal: React.FC<SecondModalProps> = ({
   const { setToken } = useTokenStore();
   const [isButtonDisabled, setButtonDisabled] = useState(false);
   const [timeLeft, setTimeLeft] = useState(0);
+  const [attempt, setAttempt] = useState(0);
 
   const handleResend = () => {
     resendCode({ email: userEmail });
@@ -47,7 +48,8 @@ const SecondModal: React.FC<SecondModalProps> = ({
   const handleDisabled = () => {
     handleResend();
     setButtonDisabled(true);
-    setTimeLeft(25);
+    setAttempt(attempt + 1);
+    setTimeLeft(50);
 
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => {
@@ -58,12 +60,20 @@ const SecondModal: React.FC<SecondModalProps> = ({
         }
         return prevTime - 1;
       });
-    }, 1000);
+    }, 50000);
 
     setTimeout(() => {
       setButtonDisabled(false);
-    }, 25000);
+    }, 50000);
   };
+
+  useEffect(() => {
+    if (attempt === 5) {
+      setIsCodeModalOpen(false);
+      setAttempt(0);
+      toast.error("Too many attempts");
+    }
+  }, [attempt]);
 
   const formik = useFormik({
     initialValues: {
@@ -153,7 +163,6 @@ const SecondModal: React.FC<SecondModalProps> = ({
                 {formik.isSubmitting ? "SENDING CODE..." : "SEND CODE"}
               </Button>
 
-              
               <div className="flex items-center justify-center w-full !mt-5">
                 <button
                   type="button"
