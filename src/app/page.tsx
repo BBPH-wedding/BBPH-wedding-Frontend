@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-// import Calendar from "@/sections/calendar/page";
+import Calendar from "@/sections/calendar/page";
 // import FAQs from "@/sections/faqs/page";
 import Hero from "@/sections/hero/page";
 import History from "@/sections/history/page";
@@ -19,10 +19,10 @@ export default function Home() {
       <section id="history">
         <History />
       </section>
-      {/* <section id="calendar">
+       <section id="calendar">
         <Calendar />
       </section>
-      <section id="itinerary">
+      {/*<section id="itinerary">
         <Itinerary />
       </section>
       <section id="travel">

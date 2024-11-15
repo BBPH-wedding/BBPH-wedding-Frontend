@@ -1,4 +1,3 @@
-import Button from "@/components/Button";
 import Modal from "@/components/FirstModal";
 import ModalLogin from "@/components/ModalLogin";
 import Titles from "@/components/Titles";
