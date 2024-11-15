@@ -19,14 +19,12 @@ import {
 } from "@/components/ui/select";
 import { Minus, Plus } from "lucide-react";
 import Button from "./Button";
-import {
-  useEmailLoginStore,
-  useTokenLoginStore,
-} from "@/store/Store";
+import { useEmailLoginStore, useTokenLoginStore } from "@/store/Store";
 import { useFormik } from "formik";
 import { completeReservation } from "@/hooks/CreateReservation";
 import toast from "react-hot-toast";
 import * as Yup from "yup";
+import { GetReservation } from "@/hooks/EditReservation";
 
 interface RegistrationFormProps {
   isModalOpen: boolean;
@@ -102,7 +100,7 @@ const ModalEdit: React.FC<RegistrationFormProps> = ({
   const handleIncrement = () => {
     if (memberCount < 5) {
       setMemberCount((prev) => prev + 1);
-      // Mantener los valores existentes y agregar uno nuevo
+
       formik.setFieldValue("peopleComing", [
         ...formik.values.peopleComing,
         { firstName: "", lastName: "" },
@@ -113,7 +111,7 @@ const ModalEdit: React.FC<RegistrationFormProps> = ({
   const handleDecrement = () => {
     if (memberCount > 1) {
       setMemberCount((prev) => prev - 1);
-      // Mantener todos los valores excepto el último
+
       formik.setFieldValue(
         "peopleComing",
         formik.values.peopleComing.slice(0, -1)
@@ -124,27 +122,27 @@ const ModalEdit: React.FC<RegistrationFormProps> = ({
   useEffect(() => {
     const fetchReservationData = async () => {
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/reservations/${userEmailLogin}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        const data = await response.json();
-
-        setMemberCount(data.peopleComing.length);
-
-        formik.setValues({
-          phoneNumber: data.phoneNumber,
-          peopleComing: data.peopleComing,
-          notes: data.notes,
-          status: data.status,
+        const response = await GetReservation({
+          email: userEmailLogin,
+          token: token,
         });
+
+        const data = response;
+
+        if (data.peopleComing.length === 0) {
+          setMemberCount(1);
+          formik.setFieldValue("peopleComing", [
+            { firstName: "", lastName: "" },
+          ]);
+        } else {
+          setMemberCount(data.peopleComing.length);
+          formik.setValues({
+            phoneNumber: data.phoneNumber,
+            peopleComing: data.peopleComing,
+            notes: data.notes,
+            status: data.status,
+          });
+        }
       } catch (error) {
         if (process.env.NODE_ENV === "development") {
           console.warn("Error fetching reservation data:", error);
