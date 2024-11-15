@@ -9,18 +9,17 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import Button from "./Button";
-import SecondModal from "./SecondModal";
-import ThirdModal from "./ThirdModal";
-import { postReservation } from "@/hooks/CreateReservation";
 import toast, { Toaster } from "react-hot-toast";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { LoginReservation } from "@/hooks/EditReservation";
 import {
-  useAuthModalStore,
-  useCodeModalStore,
-  useFormModalStore,
-  useReservationStore,
+  useEditModalStore,
+  useEmailLoginStore,
+  useLoginModalStore,
+  useTokenLoginStore,
 } from "@/store/Store";
+import ModalEdit from "./EditModal";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -39,12 +38,11 @@ const validationSchema = Yup.object().shape({
     .required("Password is required"),
 });
 
-const Modal = () => {
-  const { isFormModalOpen, setIsFormModalOpen } = useFormModalStore();
-  const { setIsAuthModalOpen, isAuthModalOpen } = useAuthModalStore();
-  const { isCodeModalOpen, setIsCodeModalOpen } = useCodeModalStore();
-
-  const { setUserEmail } = useReservationStore();
+const ModalLogin = () => {
+  const { setUserEmailLogin } = useEmailLoginStore();
+  const { setToken } = useTokenLoginStore();
+  const { setIsLoginModalOpen, isLoginModalOpen } = useLoginModalStore();
+  const { setIsEditModalOpen, isEditModalOpen } = useEditModalStore();
 
   const formik = useFormik({
     initialValues: {
@@ -54,21 +52,22 @@ const Modal = () => {
     validationSchema,
     onSubmit: async (values, { setSubmitting }) => {
       try {
-        const data = await postReservation(values);
+        const data = await LoginReservation(values);
 
         if (!data) {
           return;
         }
-        setUserEmail(values.email);
-        toast.success("Reservation created successfully");
 
-        setIsAuthModalOpen(false);
-        setIsCodeModalOpen(true);
+        toast.success("Login successfully");
+        setToken(data);
+        setUserEmailLogin(values.email);
+        setIsLoginModalOpen(false);
+        setIsEditModalOpen(true);
       } catch (error) {
         if (process.env.NODE_ENV === "development") {
           console.warn("Error in handleReservation:", error);
         }
-        toast.error("Error to send reservation");
+        toast.error("Error to login");
       } finally {
         setSubmitting(false);
       }
@@ -78,22 +77,19 @@ const Modal = () => {
   return (
     <>
       <Toaster />
-      <Dialog open={isAuthModalOpen} onOpenChange={setIsAuthModalOpen}>
+      <Dialog open={isLoginModalOpen} onOpenChange={setIsLoginModalOpen}>
         <DialogTrigger asChild>
-          <Button className="w-full" onClick={() => setIsAuthModalOpen(true)}>
-            Reserve
-          </Button>
+          <Button className="w-full">Edit reservation</Button>
         </DialogTrigger>
         <DialogContent className="bg-[#F0EBE0] rounded-lg text-black">
           <DialogHeader>
             <DialogTitle className="flex items-center justify-center w-full mb-4 text-xl font-semibold text-black">
               <p className="text-sm text-center md:text-xl">
-                Complete Your Reservation
+                Login to your account
               </p>
             </DialogTitle>
             <DialogDescription className="text-center mb-6 text-sm md:text-[17px]">
-              Please enter your email and password to proceed with the
-              reservation.
+              Please enter your email and password to edit your reservation.
             </DialogDescription>
           </DialogHeader>
           <form className="space-y-10" onSubmit={formik.handleSubmit}>
@@ -146,22 +142,18 @@ const Modal = () => {
                 formik.isSubmitting || Object.keys(formik.errors).length > 0
               }
             >
-              {formik.isSubmitting ? "RESERVING..." : "RESERVE NOW"}
+              {formik.isSubmitting ? "LOGGING IN..." : "LOGIN"}
             </Button>
           </form>
         </DialogContent>
       </Dialog>
-
-      <SecondModal
-        isCodeModalOpen={isCodeModalOpen}
-        setIsCodeModalOpen={setIsCodeModalOpen}
-      />
-      <ThirdModal
-        isModalOpen={isFormModalOpen}
-        setIsModalOpen={setIsFormModalOpen}
+      
+      <ModalEdit
+        isModalOpen={isEditModalOpen}
+        setIsModalOpen={setIsEditModalOpen}
       />
     </>
   );
 };
 
-export default Modal;
+export default ModalLogin;

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import {
   Dialog,
@@ -17,7 +19,10 @@ import {
 } from "@/components/ui/select";
 import { Minus, Plus } from "lucide-react";
 import Button from "./Button";
-import { useReservationStore, useTokenStore } from "@/store/Store";
+import {
+  useEmailLoginStore,
+  useTokenLoginStore,
+} from "@/store/Store";
 import { useFormik } from "formik";
 import { completeReservation } from "@/hooks/CreateReservation";
 import toast from "react-hot-toast";
@@ -26,11 +31,6 @@ import * as Yup from "yup";
 interface RegistrationFormProps {
   isModalOpen: boolean;
   setIsModalOpen: (open: boolean) => void;
-}
-
-interface MemberInput {
-  firstName: string;
-  lastName: string;
 }
 
 interface Formvalues {
@@ -59,12 +59,12 @@ const validationSchema = Yup.object().shape({
   notes: Yup.string(),
 });
 
-const RegistrationForm: React.FC<RegistrationFormProps> = ({
+const ModalEdit: React.FC<RegistrationFormProps> = ({
   isModalOpen,
   setIsModalOpen,
 }) => {
-  const { token } = useTokenStore();
-  const { userEmail } = useReservationStore();
+  const { token } = useTokenLoginStore();
+  const { userEmailLogin } = useEmailLoginStore();
   const [memberCount, setMemberCount] = useState(1);
 
   const formik = useFormik<Formvalues>({
@@ -79,7 +79,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
       try {
         const data = await completeReservation({
           ...values,
-          email: userEmail,
+          email: userEmailLogin,
           token: token,
         });
 
@@ -99,36 +99,76 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
     },
   });
 
-  useEffect(() => {
-    const newPeopleComing: MemberInput[] = Array(memberCount)
-      .fill(null)
-      .map(() => ({ firstName: "", lastName: "" }));
-    formik.setFieldValue("peopleComing", newPeopleComing);
-  }, [memberCount]);
-
   const handleIncrement = () => {
     if (memberCount < 5) {
       setMemberCount((prev) => prev + 1);
+      // Mantener los valores existentes y agregar uno nuevo
+      formik.setFieldValue("peopleComing", [
+        ...formik.values.peopleComing,
+        { firstName: "", lastName: "" },
+      ]);
     }
   };
 
   const handleDecrement = () => {
     if (memberCount > 1) {
       setMemberCount((prev) => prev - 1);
+      // Mantener todos los valores excepto el último
+      formik.setFieldValue(
+        "peopleComing",
+        formik.values.peopleComing.slice(0, -1)
+      );
     }
   };
+
+  useEffect(() => {
+    const fetchReservationData = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/reservations/${userEmailLogin}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = await response.json();
+
+        setMemberCount(data.peopleComing.length);
+
+        formik.setValues({
+          phoneNumber: data.phoneNumber,
+          peopleComing: data.peopleComing,
+          notes: data.notes,
+          status: data.status,
+        });
+      } catch (error) {
+        if (process.env.NODE_ENV === "development") {
+          console.warn("Error fetching reservation data:", error);
+        }
+        toast.error("Failed to complete registration");
+      } finally {
+      }
+    };
+
+    if (isModalOpen) {
+      fetchReservationData();
+    }
+  }, [userEmailLogin, token]);
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
       <DialogContent className="bg-[#F0EBE0] rounded-lg text-black max-w-[95vw] w-full sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="mb-4 text-sm font-semibold text-center md:text-xl">
-            Registration Form
+            Edit Reservation
           </DialogTitle>
           <DialogDescription className="mb-6 text-sm text-center sm:text-base">
-            Please complete all required fields. In the Important Notes section,
-            specify any allergies or disabilities that may require special
-            attention at the event.
+            Modify your reservation details. Select new dates, adjust the number
+            of guests, or make any necessary changes.
           </DialogDescription>
         </DialogHeader>
 
@@ -313,4 +353,4 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
   );
 };
 
-export default RegistrationForm;
+export default ModalEdit;
