@@ -1,13 +1,12 @@
 import Navbar from "@/components/Navbar";
 import Calendar from "@/sections/calendar/page";
-// import FAQs from "@/sections/faqs/page";
 import Hero from "@/sections/hero/page";
 import History from "@/sections/history/page";
-// import Hotel from "@/sections/hotel/page";
-// import Itinerary from "@/sections/itinerary/page";
+import Hotel from "@/sections/hotel/page";
+import Itinerary from "@/sections/itinerary/page";
 import RSVP from "@/sections/RSVP/page";
-// import ToDos from "@/sections/to-do's/page";
-// import Travel from "@/sections/travel/page";
+import ToDos from "@/sections/to-do's/page";
+import Travel from "@/sections/travel/page";
 
 export default function Home() {
   return (
@@ -22,7 +21,7 @@ export default function Home() {
        <section id="calendar">
         <Calendar />
       </section>
-      {/*<section id="itinerary">
+      <section id="itinerary">
         <Itinerary />
       </section>
       <section id="travel">
@@ -30,16 +29,13 @@ export default function Home() {
       </section>
       <section id="recommendations">
         <Hotel />
-      </section> */}
-      {/* <section id="things-to-do">
+      </section>
+      <section id="things-to-do">
         <ToDos />
-      </section> */}
+      </section>
       <section id="rsvp">
         <RSVP />
       </section>
-      {/* <section id="faqs">
-        <FAQs />
-      </section> */}
     </>
   );
 }
