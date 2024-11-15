@@ -1,12 +1,10 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Calendar from "@/sections/calendar/page";
-
 import Hero from "@/sections/hero/page";
 import History from "@/sections/history/page";
-
 import RSVP from "@/sections/RSVP/page";
-
+//prueba
 
 export default function Home() {
   return (
