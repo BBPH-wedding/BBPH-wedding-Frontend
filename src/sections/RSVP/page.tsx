@@ -1,4 +1,5 @@
-import Button from "@/components/Button";
+import Modal from "@/components/FirstModal";
+import ModalLogin from "@/components/ModalLogin";
 import Titles from "@/components/Titles";
 
 const RSVP = () => {
@@ -23,14 +24,8 @@ const RSVP = () => {
           </p>
 
           <div className="flex flex-wrap justify-center w-full mt-16 gap-7 md:mt-20 md:gap-20">
-            <Button className="w-full">
-              Reserve
-            </Button>
-            <Button className="w-full">
-              Edit Reservation
-            </Button>
-            {/* <Modal />
-            <ModalLogin /> */}
+            <Modal />
+            <ModalLogin />
           </div>
         </div>
       </section>
