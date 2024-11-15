@@ -134,7 +134,7 @@ const SecondModal: React.FC<SecondModalProps> = ({
                 </label>
                 <div className="flex flex-col justify-center w-full">
                   <CodeInput
-                    className={`w-full p-5 bg-white/70 focus:outline-none ${
+                    className={`p-5 bg-white/70 focus:outline-none ${
                       formik.touched.confirmationToken &&
                       formik.errors.confirmationToken
                         ? "border-2 border-red-500"
