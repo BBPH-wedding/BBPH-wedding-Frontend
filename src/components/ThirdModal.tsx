@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -26,11 +26,6 @@ import * as Yup from "yup";
 interface RegistrationFormProps {
   isModalOpen: boolean;
   setIsModalOpen: (open: boolean) => void;
-}
-
-interface MemberInput {
-  firstName: string;
-  lastName: string;
 }
 
 interface Formvalues {
@@ -99,22 +94,26 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
     },
   });
 
-  useEffect(() => {
-    const newPeopleComing: MemberInput[] = Array(memberCount)
-      .fill(null)
-      .map(() => ({ firstName: "", lastName: "" }));
-    formik.setFieldValue("peopleComing", newPeopleComing);
-  }, [memberCount]);
 
   const handleIncrement = () => {
     if (memberCount < 5) {
       setMemberCount((prev) => prev + 1);
+
+      formik.setFieldValue("peopleComing", [
+        ...formik.values.peopleComing,
+        { firstName: "", lastName: "" },
+      ]);
     }
   };
 
   const handleDecrement = () => {
     if (memberCount > 1) {
       setMemberCount((prev) => prev - 1);
+
+      formik.setFieldValue(
+        "peopleComing",
+        formik.values.peopleComing.slice(0, -1)
+      );
     }
   };
 
