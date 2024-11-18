@@ -54,7 +54,7 @@ const validationSchema = Yup.object().shape({
     })
   ),
   status: Yup.string().required("Please select an event status"),
-  notes: Yup.string(),
+  notes: Yup.string().max(250, "Notes must be at most 250 characters"),
 });
 
 const ModalEdit: React.FC<RegistrationFormProps> = ({
@@ -304,7 +304,18 @@ const ModalEdit: React.FC<RegistrationFormProps> = ({
               onValueChange={(value) => formik.setFieldValue("status", value)}
               value={formik.values.status}
             >
-              <SelectTrigger className="w-full border-none rounded-none shadow-none p-9 bg-white/70 focus:outline-none">
+              <SelectTrigger
+                className={`
+        w-full border-2 p-9 rounded-none shadow-none bg-white/70 focus:outline-none 
+        ${
+          formik.values.status === "Confirmed"
+            ? "border-green-800"
+            : formik.values.status === "Not Going"
+            ? "border-orange-300"
+            : "border-gray-300"
+        }
+      `}
+              >
                 <SelectValue placeholder="Select event status" />
               </SelectTrigger>
               <SelectContent>
@@ -321,7 +332,6 @@ const ModalEdit: React.FC<RegistrationFormProps> = ({
               </div>
             )}
           </div>
-
           <div className="space-y-2">
             <label className="block mb-3 text-sm font-semibold text-black md:text-lg">
               Important Notes
@@ -334,7 +344,13 @@ const ModalEdit: React.FC<RegistrationFormProps> = ({
               placeholder="Write any important notes here..."
               className="w-full p-5 bg-white/70 focus:outline-none"
             />
+            {formik.touched.notes && formik.errors.notes && (
+              <div className="mt-1 text-sm text-red-500">
+                {formik.errors.notes}
+              </div>
+            )}
           </div>
+          
 
           <Button
             type="submit"

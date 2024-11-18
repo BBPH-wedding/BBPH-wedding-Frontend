@@ -51,7 +51,7 @@ const validationSchema = Yup.object().shape({
     })
   ),
   status: Yup.string().required("Please select an event status"),
-  notes: Yup.string().max(200, "Notes must be at most 200 characters"),
+  notes: Yup.string().max(250, "Notes must be at most 250 characters"),
 });
 
 const RegistrationForm: React.FC<RegistrationFormProps> = ({
