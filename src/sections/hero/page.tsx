@@ -1,10 +1,5 @@
 import Names from "@/components/Names";
-import { useEffect } from "react";
-import toast, { Toaster } from "react-hot-toast";
-
-interface LoginProps {
-  onAuthenticate: (status: boolean) => void;
-}
+import { Toaster } from "react-hot-toast";
 
 const Hero = () => {
 
