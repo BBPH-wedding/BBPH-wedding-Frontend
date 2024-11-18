@@ -60,7 +60,7 @@ interface FormModalState {
 }
 
 export const useFormModalStore = create<FormModalState>((set) => ({
-  isFormModalOpen: false,
+  isFormModalOpen: true,
   setIsFormModalOpen: (isOpen) => set({ isFormModalOpen: isOpen }),
 }));
 

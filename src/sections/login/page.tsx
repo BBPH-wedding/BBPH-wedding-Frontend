@@ -14,9 +14,9 @@ const Login = ({ onAuthenticate }: LoginProps) => {
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password === CORRECT_PASSWORD) {
+      toast.success("Welcome to our wedding website!");
       localStorage.setItem("isAuthenticated", "true");
       onAuthenticate(true);
-      toast.success("Welcome to our wedding website!");
     } else {
       toast.error("Incorrect password!");
     }
@@ -25,7 +25,7 @@ const Login = ({ onAuthenticate }: LoginProps) => {
   return (
     <>
       <Toaster />
-      <div className="min-h-dvh bg-[#070707] flex items-center justify-center py-8">
+      <div className="min-h-dvh bg-[#060606] flex items-center justify-center py-8">
         <section className="flex flex-col items-center justify-center w-full max-w-2xl gap-8 px-5 mx-auto">
           <div className="flex flex-col items-center">
             <h1 className="font-[Destiny] text-7xl sm:text-9xl leading-tight">
