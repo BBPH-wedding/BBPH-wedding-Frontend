@@ -1,13 +1,41 @@
+"use client";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Calendar from "@/sections/calendar/page";
 import Hero from "@/sections/hero/page";
 import History from "@/sections/history/page";
+import Login from "@/sections/login/page";
 import RSVP from "@/sections/RSVP/page";
+import { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Home() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const authStatus = localStorage.getItem("isAuthenticated");
+    if (authStatus === "true") {
+      setIsAuthenticated(true);
+      toast.success("Welcome to our wedding website!");
+    }
+    setIsLoading(false);
+  }, []);
+
+  const handleAuthentication = (status: boolean) => {
+    setIsAuthenticated(status);
+  };
+
+  if (isLoading) {
+    return null;
+  }
+
+  if (!isAuthenticated) {
+    return <Login onAuthenticate={handleAuthentication} />;
+  }
   return (
     <>
+    <Toaster/>
       <Navbar />
       <Hero />
       <section id="history">
