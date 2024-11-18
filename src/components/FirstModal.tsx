@@ -21,6 +21,7 @@ import {
   useFormModalStore,
   useReservationStore,
 } from "@/store/Store";
+import { useEffect } from "react";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -74,6 +75,12 @@ const Modal = () => {
       }
     },
   });
+
+  useEffect(() => {
+    if (!isAuthModalOpen) {
+      formik.resetForm();
+    }
+  }, [isAuthModalOpen]);
 
   return (
     <>

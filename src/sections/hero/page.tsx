@@ -1,8 +1,16 @@
 import Names from "@/components/Names";
+import { useEffect } from "react";
+import toast, { Toaster } from "react-hot-toast";
+
+interface LoginProps {
+  onAuthenticate: (status: boolean) => void;
+}
 
 const Hero = () => {
+
   return (
     <>
+      <Toaster />
       <section className="h-dvh">
         <div className="flex flex-col items-center justify-center h-full ">
           <div className="flex mt-80">
@@ -14,7 +22,10 @@ const Hero = () => {
           </div>
 
           <div className="mt-32">
-            <Names sizeH1="text-4xl sm:text-6xl" sizeSpan="text-[3rem] sm:text-[4rem]" />
+            <Names
+              sizeH1="text-4xl sm:text-6xl"
+              sizeSpan="text-[3rem] sm:text-[4rem]"
+            />
           </div>
         </div>
       </section>

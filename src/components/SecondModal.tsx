@@ -40,40 +40,58 @@ const SecondModal: React.FC<SecondModalProps> = ({
   const [timeLeft, setTimeLeft] = useState(0);
   const [attempt, setAttempt] = useState(0);
 
-  const handleResend = () => {
-    resendCode({ email: userEmail });
-    toast.success("Code resent successfully");
-  };
+  useEffect(() => {
+    let timer: NodeJS.Timeout | null = null;
+
+    if (timeLeft > 0) {
+      timer = setInterval(() => {
+        setTimeLeft((prevTime) => {
+          if (prevTime <= 1) {
+            clearInterval(timer!);
+            setButtonDisabled(false);
+            return 0;
+          }
+          return prevTime - 1;
+        });
+      }, 1000);
+    }
+
+    return () => {
+      if (timer) {
+        clearInterval(timer);
+      }
+    };
+  }, [timeLeft]);
 
   const handleDisabled = () => {
-    handleResend();
-    setButtonDisabled(true);
-    setAttempt(attempt + 1);
-    setTimeLeft(50);
-
-    const timer = setInterval(() => {
-      setTimeLeft((prevTime) => {
-        if (prevTime <= 1) {
-          clearInterval(timer);
-          setButtonDisabled(false);
-          return 0;
-        }
-        return prevTime - 1;
-      });
-    }, 50000);
-
-    setTimeout(() => {
-      setButtonDisabled(false);
-    }, 50000);
-  };
-
-  useEffect(() => {
     if (attempt === 5) {
       setIsCodeModalOpen(false);
       setAttempt(0);
       toast.error("Too many attempts");
+      return null;
+    } else {
+      handleResend();
+      setButtonDisabled(true);
+      setAttempt((prev) => prev + 1);
+      setTimeLeft(50);
     }
-  }, [attempt]);
+  };
+
+  const handleDisabledImmediately = () => {
+    setButtonDisabled(true);
+    setTimeLeft(50);
+  };
+
+  useEffect(() => {
+    if (isCodeModalOpen) {
+      handleDisabledImmediately();
+    }
+  }, [isCodeModalOpen]);
+
+  const handleResend = () => {
+    resendCode({ email: userEmail });
+    toast.success("Code resent successfully");
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -166,7 +184,7 @@ const SecondModal: React.FC<SecondModalProps> = ({
               <div className="flex items-center justify-center w-full !mt-5">
                 <button
                   type="button"
-                  className={`w-40 p-2 text-white font-semibold text-sm tracking-[0.3px] transition-all duration-300 rounded-full 
+                  className={`w-40 p-2 text-white font-semibold text-sm tracking-[0.3px] transition-all duration-300
         ${
           isButtonDisabled
             ? "bg-gray-400 cursor-not-allowed"

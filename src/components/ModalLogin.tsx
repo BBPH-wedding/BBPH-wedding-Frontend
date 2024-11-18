@@ -20,6 +20,7 @@ import {
   useTokenLoginStore,
 } from "@/store/Store";
 import ModalEdit from "./EditModal";
+import { useEffect } from "react";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -73,6 +74,12 @@ const ModalLogin = () => {
       }
     },
   });
+
+  useEffect(() => {
+    if (!isLoginModalOpen) {
+      formik.resetForm();
+    }
+  }, [isLoginModalOpen]);
 
   return (
     <>

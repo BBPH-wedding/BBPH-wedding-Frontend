@@ -14,7 +14,6 @@ const Login = ({ onAuthenticate }: LoginProps) => {
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password === CORRECT_PASSWORD) {
-      toast.success("Welcome to our wedding website!");
       localStorage.setItem("isAuthenticated", "true");
       onAuthenticate(true);
     } else {

@@ -7,25 +7,26 @@ import History from "@/sections/history/page";
 import Login from "@/sections/login/page";
 import RSVP from "@/sections/RSVP/page";
 import { useEffect, useState } from "react";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const authStatus = localStorage.getItem("isAuthenticated");
     if (authStatus === "true") {
       setIsAuthenticated(true);
     }
-    setIsLoading(false);
+    setIsLoading(true);
   }, []);
 
   const handleAuthentication = (status: boolean) => {
     setIsAuthenticated(status);
+    toast.success("Welcome to our wedding website!");
   };
 
-  if (isLoading) {
+  if (!isLoading) {
     return null;
   }
 
