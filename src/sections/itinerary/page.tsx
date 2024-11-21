@@ -64,12 +64,12 @@ const Itinerary = () => {
                   <p className="tracking-[0.4rem]">{event.time}</p>
                 </div>
               </div>
-              <div className="flex flex-wrap justify-between w-full mt-10 italic text-primary/70">
+              <div className="flex flex-col justify-between w-full mt-10 italic lg:flex-row text-primary/70">
                 <div>
                   <Link
                     href={event.link}
                     target="_blank"
-                    className="hover:text-primaryGreen transition-all duration-300"
+                    className="transition-all duration-300 hover:text-primaryGreen"
                   >
                     View Location
                   </Link>
