@@ -14,25 +14,29 @@ interface Faq {
 
 const faqs: Faq[] = [
   {
-    question: "What is the cost of a wedding in another country?",
+    question: "Is Medellín safe for tourists?",
     answer:
-      "The cost of a wedding in another country is usually higher than in your home country. This is because of the logistics involved, such as flights, accommodation, and transportation. However, we can help you find affordable options that fit your budget.",
+      "Yes, Medellín has become much safer in recent years. While some areas are best avoided, most tourist-friendly neighborhoods like El Poblado and Laureles are generally safe. As with any city, it’s important to stay aware, avoid risky areas at night, and follow common-sense precautions.",
   },
   {
-    question: "What are the safety measures that I should take?",
+    question: "What is the best time to visit Medellín?",
     answer:
-      "We recommend that you take the following safety measures to ensure a smooth and enjoyable wedding experience. These measures include: choosing a reputable wedding planner, booking flights and accommodation in advance, and having a backup plan in case of emergency.",
+      "Medellín has a year-round spring-like climate, making it an excellent destination any time of the year. However, the dry season (December to February) is particularly pleasant for outdoor activities and sightseeing. The rainy seasons are in March to May and September to November, but rain usually comes in the afternoon and doesn’t last long.",
   },
   {
-    question:
-      "What are the logistics involved in planning a wedding?",
+    question: "How do I get around Medellín?",
     answer:
-      "The logistics involved in planning a wedding in another country can be overwhelming. However, with the help of a reputable wedding planner, you can ensure that everything is taken care of. This includes booking flights and accommodation, arranging transportation, and coordinating with vendors and suppliers.",
+      "The city has a well-connected and affordable public transportation system, including the Metro, Metrocable (cable cars), and buses. For convenience, ride-sharing apps like Uber and DiDi are also widely used. Taxis are available but be cautious when hailing them off the street.",
   },
   {
-    question: "What are the benefits of having a wedding in another country?",
+    question: "What are the must-visit attractions in Medellín?",
     answer:
-      "Having a wedding in another country can offer several benefits. It can be a great opportunity to broaden your horizons and experience different cultures. It can also be a way to save money on travel and accommodation costs. Additionally, it can provide a unique and unforgettable experience that you may not find in your home country.",
+      "Some of the most popular attractions include: Plaza Botero, with sculptures by Fernando Botero, Comuna 13, famous for its street art and social transformation, Parque Arví, a nature reserve just outside the city, Museo de Antioquia, showcasing Botero’s works and regional art, Pueblito Paisa, a replica of a traditional Antioquian village with panoramic views of the city.",
+  },
+  {
+    question: "What’s the nightlife like in Medellín?",
+    answer:
+      "Medellín has a vibrant nightlife scene, especially in areas like El Poblado, Provenza, and La 70 in Laureles. You’ll find a mix of upscale clubs, casual bars, salsa dancing spots, and lively rooftop lounges. It’s safe to enjoy the nightlife as long as you follow basic safety guidelines, like traveling in groups and keeping an eye on your belongings.",
   },
 ];
 
@@ -62,8 +66,10 @@ const FAQs = () => {
                 className="w-full text-black border-b-[2px] border-primaryGreen/70"
               >
                 <AccordionItem value={faq.question}>
-                  <AccordionTrigger className="text-sm uppercase md:text-lg">{faq.question}</AccordionTrigger>
-                  <AccordionContent className="max-w-[45rem] text-primary"> 
+                  <AccordionTrigger className="text-sm uppercase md:text-lg">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="max-w-[45rem] text-primary">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>

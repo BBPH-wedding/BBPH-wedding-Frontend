@@ -1,13 +1,27 @@
 import Button from "@/components/Button";
 import ContainerText from "@/components/ContainerText";
 import Titles from "@/components/Titles";
+import Link from "next/link";
+
+const airlines = [
+  { name: "Air Europa", href: "https://www.aireuropa.com" },
+  { name: "Avianca", href: "https://www.avianca.com" },
+  { name: "Aeromexico", href: "https://www.aeromexico.com/" },
+  { name: "LATAM", href: "https://www.latamairlines.com/" },
+  { name: "Iberia", href: "https://www.iberia.com/" },
+  { name: "Copa Airlines", href: "https://www.copaair.com/" },
+  { name: "American Airlines", href: "https://www.aa.com/" },
+  { name: "KLM", href: "https://www.klm.com" },
+  { name: "Lufthansa", href: "https://www.lufthansa.com/" },
+  { name: "Air Canada", href: "https://www.aircanada.com/" },
+  { name: "Turkish Airlines", href: "https://www.turkishairlines.com/" },
+];
 
 const Travel = () => {
   return (
     <>
       <section className="w-auto pb-14 sm:pb-32 h-auto bg-[#F0EBE0] px-5">
         <div className="flex flex-col items-center justify-center w-full h-full">
-          
           <div className="mb-14">
             <Titles
               title="Travel Recommendations"
@@ -45,9 +59,16 @@ const Travel = () => {
                 <div className="flex flex-col gap-5 mt-5 text-primary/70">
                   <p>Some of the best airlines are: </p>
                   <p>
-                    Air Europa, Avianca, Aeromexico, LATAM, Iberia, Copa
-                    Airlines <br /> American Airlines, Viva Air, KLM, Lufthansa,
-                    Air Canada, Turkish Airlines
+                    {airlines.map((airline, index) => (
+                      <span
+                        key={index}
+                        className="hover:text-primaryGreen transition-all duration-300"
+                      >
+                        <Link href={airline.href} target="_blank">{airline.name}</Link>
+                        {index < airlines.length - 1 && ", "}
+                        {(index + 1) % 6 === 0 && <br />}
+                      </span>
+                    ))}
                   </p>
                   <p>Make sure your passport has at least 6 months validity.</p>
                   <p>
@@ -58,8 +79,28 @@ const Travel = () => {
               </div>
 
               <div className="flex flex-wrap justify-center w-full mt-16 gap-7 md:mt-20 md:gap-20">
-                <Button className="w-full">REQUIREMENTS</Button> 
-                <Button className="w-full">CHECK-MIG</Button>
+                <Button
+                  className="w-full"
+                  onClick={() =>
+                    window.open(
+                      "https://www.cancilleria.gov.co/en/procedures_services/visa/requirements",
+                      "_blank"
+                    )
+                  }
+                >
+                  REQUIREMENTS
+                </Button>
+                <Button
+                  className="w-full"
+                  onClick={() =>
+                    window.open(
+                      "https://apps.migracioncolombia.gov.co/pre-registro/en",
+                      "_blank"
+                    )
+                  }
+                >
+                  CHECK-MIG
+                </Button>
               </div>
             </div>
           </ContainerText>

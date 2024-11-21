@@ -1,19 +1,24 @@
 import Names from "@/components/Names";
 import { Toaster } from "react-hot-toast";
+import img from "../../../public/HOME.png";
+
+const image = img.src;
 
 const Hero = () => {
-
   return (
     <>
       <Toaster />
-      <section className="h-dvh">
+      <section
+        className="h-dvh bg-center bg-cover bg-no-repeat"
+        style={{ backgroundImage: `url(${image})` }}
+      >
         <div className="flex flex-col items-center justify-center h-full ">
           <div className="flex mt-80">
-            <div className="w-[14vw] h-0 border border-white mt-[10px] md:w-32" />
-            <h1 className="text-[3vw] tracking-[0.5rem] mx-5 md:tracking-[1rem] md:mx-10 sm:text-[1rem]">
+            <div className="w-[14vw] h-0 border border-black mt-[10px] md:w-32" />
+            <h1 className="text-[3vw] tracking-[0.5rem] mx-5 md:tracking-[1rem] md:mx-10 sm:text-[1rem] text-black">
               WEDDING PARTY
             </h1>
-            <div className="w-[14vw] h-0 border border-white ml-[-0.9rem] mt-[10px] md:w-32" />
+            <div className="w-[14vw] h-0 border border-black ml-[-0.9rem] mt-[10px] md:w-32" />
           </div>
 
           <div className="mt-32">

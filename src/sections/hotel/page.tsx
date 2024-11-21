@@ -1,5 +1,18 @@
 import ContainerText from "@/components/ContainerText";
 import Titles from "@/components/Titles";
+import Link from "next/link";
+
+const hotels = [
+  { name: "El Cielo Hotel Medellin", href: "https://www.elcielohotel.com/" },
+  {
+    name: "The Click Clack Hotel Medellin",
+    href: "https://www.clickclackhotel.com",
+  },
+  {
+    name: "Hotel Estelar Medellin Square",
+    href: "https://be.synxis.com/?adult=1&arrive=2025-01-28&chain=23120&child=0&currency=COP&depart=2025-02-04&group=2503VAOVA_006&hotel=5790&level=hotel&locale=es-MX&productcurrency=COP&rooms=1",
+  },
+];
 
 const Hotel = () => {
   return (
@@ -9,12 +22,37 @@ const Hotel = () => {
           <Titles title="Hotels" color="text-primaryGreen" size="large" />
           <p className="text-sm text-center mt-14 md:text-lg text-primary/70">
             All guests are required to coordinate their own transportation from
-            and to the airport. <br /> For the wedding ceremony there will be
-            shuttles going out of the following hotels at 15h on february 01
+            and to the airport. <br /> For the wedding ceremony, there will be
+            shuttles going out of the following hotels at 15h on February 01.
           </p>
           <p className="text-sm font-semibold text-center mt-14 md:text-lg text-primary/70">
-            El Cielo Hotel Medellin, The Click Clack Hotel Medellin, Hotel
-            Estelar Medellin Square
+            {hotels.map((hotel, index) => (
+              <span
+                key={index}
+                className="hover:text-primaryGreen transition-all duration-300"
+              >
+                <Link href={hotel.href} target="_blank">
+                  {hotel.name}
+                </Link>
+                {index < hotels.length - 1 && ", "}
+                {(index + 1) % 6 === 0 && <br />}
+              </span>
+            ))}
+          </p>
+          <p className="text-xs text-center mt-8 md:text-sm text-primary/50">
+            Use the code{" "}
+            <span className="font-bold text-primaryGreen">
+              &quot;REBEFEB2025MDENICO&quot;
+            </span>{" "}
+            to get a discount at
+            <Link
+              href="https://www.clickclackhotel.com"
+              target="_blank"
+              className="text-primaryGreen hover:underline ml-1"
+            >
+              The Click Clack Hotel Medellin
+            </Link>
+            .
           </p>
         </div>
 
@@ -32,8 +70,8 @@ const Hotel = () => {
               <div className="flex flex-col gap-1 mt-5 text-primary/70">
                 <p>
                   Ubers work well to get around town and for airport pick up.
-                  <br /> To coordinate your transportation in advance,  here&apos;s a
-                  company of trusted drivers you can contact:
+                  <br /> To coordinate your transportation in advance,
+                  here&apos;s a company of trusted drivers you can contact:
                 </p>
                 <p className="mt-5 font-semibold">
                   EC Transportes SAS / Raúl Vasquez <br />
@@ -54,7 +92,13 @@ const Hotel = () => {
               />
               <div className="flex flex-col gap-1 mt-5 text-primary/70">
                 <p className="mt-5 font-semibold">
-                  Portada Peluquería Medellín <br />
+                  <Link
+                    href="https://www.instagram.com/portadamedellin/"
+                    target="_blank"
+                    className="hover:text-primaryGreen transition-all duration-300"
+                  >
+                    Portada Peluquería Medellín <br />
+                  </Link>
                   <span className="font-normal">
                     Centro Comercial Vizcaya. Local 148. El Poblado, Medellín
                     (+57) 321 3931610
@@ -62,7 +106,13 @@ const Hotel = () => {
                 </p>
 
                 <p className="mt-5 font-semibold">
-                  Claudia Londoño Peluquería <br />
+                  <Link
+                    href="https://www.instagram.com/claudialonpeluqueria/"
+                    target="_blank"
+                    className="hover:text-primaryGreen transition-all duration-300"
+                  >
+                    Claudia Londoño Peluquería <br />
+                  </Link>
                   <span className="font-normal">
                     Centro Comercial Río Sur, Cra 43ª #6Sur-26. El Poblado,
                     Medellín (+57) 314 4890100
@@ -70,8 +120,13 @@ const Hotel = () => {
                 </p>
 
                 <p className="mt-5 font-semibold">
-                  Livana Salóm
-                  <br />
+                  <Link
+                    href="https://www.instagram.com/livanasalon/"
+                    target="_blank"
+                    className="hover:text-primaryGreen transition-all duration-300"
+                  >
+                    Livana Salóm <br />
+                  </Link>
                   <span className="font-normal">
                     Cra 36 #10-75, El Poblado, Medellín. (+57) 3017843028
                   </span>
@@ -87,20 +142,37 @@ const Hotel = () => {
               />
               <div className="flex flex-col gap-1 mt-5 text-primary/70">
                 <p className="mt-5 font-semibold">
-                  Diana López Makeup Studio <br />
+                  <Link
+                    href="https://www.instagram.com/dianalopezmakeupstudio/"
+                    target="_blank"
+                    className="hover:text-primaryGreen transition-all duration-300"
+                  >
+                    Diana López Makeup Studio <br />
+                  </Link>
                   <span className="font-normal">
                     Calle 10B #36-20. El Poblado, Medellín (+57) 314 8844442
                   </span>
                 </p>
 
                 <p className="mt-5 font-semibold">
-                  Grehisizi Makeup <br />
+                  <Link
+                    href="https://www.instagram.com/emakeup_cools/"
+                    target="_blank"
+                    className="hover:text-primaryGreen transition-all duration-300"
+                  >
+                    Emaniel Garcia Cools <br />
+                  </Link>
                   <span className="font-normal">(+57) 302 5921522</span>
                 </p>
 
                 <p className="mt-5 font-semibold">
-                  Zareth Makeup Studio
-                  <br />
+                  <Link
+                    href="https://www.instagram.com/zarethmakeup/"
+                    target="_blank"
+                    className="hover:text-primaryGreen transition-all duration-300"
+                  >
+                    Zareth Makeup Studio <br />
+                  </Link>
                   <span className="font-normal">
                     Cra 25 # 12Sur 59. Local 98-04. El Poblado, Medellín. (+57)
                     3012069133

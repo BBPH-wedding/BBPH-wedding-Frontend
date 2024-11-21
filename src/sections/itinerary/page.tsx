@@ -1,5 +1,6 @@
 import ContainerText from "@/components/ContainerText";
 import Titles from "@/components/Titles";
+import Link from "next/link";
 
 interface Event {
   title: string;
@@ -8,6 +9,7 @@ interface Event {
   time: string;
   date: string;
   line?: boolean;
+  link: string;
 }
 
 const events: Event[] = [
@@ -18,6 +20,7 @@ const events: Event[] = [
     time: "5:00 PM - 11:00 PM",
     date: "Friday, January 31 / 2025",
     line: true,
+    link: "https://maps.app.goo.gl/1Nys12pUG53Yoxph7",
   },
   {
     title: "Wedding Ceremony",
@@ -26,6 +29,7 @@ const events: Event[] = [
     time: "4:00 PM",
     date: "Saturday, February 1 / 2025",
     line: true,
+    link: "https://maps.app.goo.gl/LbHxAVnKwniNNQNN8",
   },
   {
     title: "Ceremony Cocktail Party",
@@ -33,6 +37,7 @@ const events: Event[] = [
     dressCode: "Tuxedo / Smoking",
     time: "5:30 PM",
     date: "Saturday, February 1 / 2025",
+    link: "https://maps.app.goo.gl/XYrycruhUhacoVxi9",
   },
 ];
 
@@ -60,7 +65,15 @@ const Itinerary = () => {
                 </div>
               </div>
               <div className="flex flex-wrap justify-between w-full mt-10 italic text-primary/70">
-                <div>View Location</div>
+                <div>
+                  <Link
+                    href={event.link}
+                    target="_blank"
+                    className="hover:text-primaryGreen transition-all duration-300"
+                  >
+                    View Location
+                  </Link>
+                </div>
                 <div>{event.date}</div>
               </div>
             </div>
