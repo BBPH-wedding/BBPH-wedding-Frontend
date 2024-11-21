@@ -302,7 +302,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
               value={formik.values.notes}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              placeholder="Write any important notes here..."
+              placeholder="Enter any important notes such as allergies, disabilities, or special considerations for the event."
               className="w-full p-5 bg-white/70 focus:outline-none"
             />
             {formik.touched.notes && formik.errors.notes && (

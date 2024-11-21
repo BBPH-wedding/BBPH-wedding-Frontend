@@ -1,7 +1,10 @@
+"use client";
+
 import Titles from "@/components/Titles";
-import store from "../../../public/stores.jpg";
-import restaurant from "../../../public/restaurants.jpg";
-import nightlife from "../../../public/nightlife.jpg";
+import store from "../../../public/SHOPPING.jpeg";
+import restaurant from "../../../public/FOOD & COFFES.jpeg";
+import nightlife from "../../../public/NIGHT LIFE.jpeg";
+import turism from "../../../public/TURISM.jpeg";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button";
@@ -9,6 +12,7 @@ import Button from "@/components/Button";
 const restaurantimg = restaurant.src;
 const storeimg = store.src;
 const nightlifeimg = nightlife.src;
+const turismimg = turism.src;
 
 interface Category {
   title: string;
@@ -39,9 +43,44 @@ const category: Category[] = [
     img: nightlifeimg,
     link: "https://maps.app.goo.gl/MEpCmqyZ51EoZfAr9",
   },
+  {
+    title: "TURISM",
+    description:
+      "Discover the best places to visit in Medellin and enjoy a relaxing trip.",
+    img: turismimg,
+    link: "https://maps.app.goo.gl/MEpCmqyZ51EoZfAr9",
+  }
 ];
 
 const ToDos = () => {
+
+  const handleDownload = async () => {
+    try {
+      const response = await fetch('/MED GUIDE.pdf');
+      
+      if (!response.ok) {
+        throw new Error('El archivo no se pudo descargar');
+      }
+      
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'MED GUIDE.pdf';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      
+      // Liberar memoria
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error al descargar el archivo:', error);
+      // Puedes mostrar un mensaje de error al usuario si lo deseas
+    }
+  };
+
+
   return (
     <>
       <section className="h-auto pb-14 sm:pb-32 bg-[#F0EBE0] flex flex-col items-center justify-center text-center px-5 text-sm md:text-lg">
@@ -55,7 +94,7 @@ const ToDos = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 px-4 mx-auto md:grid-cols-2 lg:grid-cols-3 max-w-7xl">
+        <div className="grid grid-cols-1 gap-8 px-4 mx-auto md:grid-cols-2 lg:grid-cols-4 max-w-7xl">
           {category.map((category, index) => (
             <div key={index} className="flex flex-col group">
               <Link
@@ -97,7 +136,7 @@ const ToDos = () => {
             best of the city in a practical and detailed way.
           </p>
           <div className="flex justify-center mt-10 md:mt-16">
-            <Button className="w-full hover:!bg-white">DOWNLOAD PDF</Button> 
+            <Button className="w-full hover:!bg-white" onClick={handleDownload}>DOWNLOAD PDF</Button> 
           </div>
         </div>
       </section>
