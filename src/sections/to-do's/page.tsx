@@ -8,8 +8,6 @@ import turism from "../../../public/TURISM.jpeg";
 import vaova from "../../../public/VAOVa.png";
 import Image from "next/image";
 import Link from "next/link";
-import Button from "@/components/Button";
-
 const restaurantimg = restaurant.src;
 const storeimg = store.src;
 const nightlifeimg = nightlife.src;
