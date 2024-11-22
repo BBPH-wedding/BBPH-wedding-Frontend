@@ -39,15 +39,13 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScrollSpy = () => {
-      const sections = navItems.map(item => 
-        document.getElementById(item.id)
-      );
+      const sections = navItems.map((item) => document.getElementById(item.id));
 
-      const scrollPosition = window.scrollY + 100; 
+      const scrollPosition = window.scrollY + 100;
 
       sections.forEach((section) => {
         if (!section) return;
-        
+
         const sectionTop = section.offsetTop;
         const sectionHeight = section.offsetHeight;
 
@@ -64,23 +62,27 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScrollSpy);
   }, []);
 
-
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
-      setIsOpen(false); 
+      setIsOpen(false);
     }
   };
 
   return (
     <nav
       className={`flex items-center justify-between h-24 px-[3vw] pt-4 fixed w-dvw top-0 transition-all duration-700 ${
-        showBackground ? "bg-white/20 backdrop-blur-sm z-50" : "bg-transparent"
+        showBackground
+          ? "bg-gradient-to-b from-white/20 via-white/10 to-transparent backdrop-blur-sm z-50"
+          : "bg-transparent"
       }`}
     >
       <div className="z-30">
-        <Names sizeH1="text-2xl uppercase sm:text-3xl" sizeSpan="text-3xl sm:text-5xl" />
+        <Names
+          sizeH1="text-2xl uppercase sm:text-3xl"
+          sizeSpan="text-3xl sm:text-5xl"
+        />
       </div>
 
       <div>

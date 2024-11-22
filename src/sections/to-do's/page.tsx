@@ -52,7 +52,7 @@ const category: Category[] = [
   },
   {
     title: "VAOVA",
-    description: "Here you will find a guide for turism in Medellin, Colombia.",
+    description: "Here you will find a guide for tourism in Medellin, Colombia.",
     img: vaovaimg,
   },
 ];

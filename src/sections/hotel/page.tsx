@@ -24,7 +24,9 @@ const Hotel = () => {
             and to the airport. <br /> For the wedding ceremony, there will be
             shuttles going out of the following hotels at 15h on February 01.{" "}
             <br />
-            <span className="italic">Click on the names below to visit their websites.</span>
+            <span className="italic">
+              Click on the names below to visit their websites.
+            </span>
           </p>
 
           <p className="flex justify-center gap-[7vw] text-sm font-semibold text-center md:gap-24 mt-14 md:text-lg text-primary/70">

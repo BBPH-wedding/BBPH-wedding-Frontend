@@ -58,13 +58,18 @@ const Travel = () => {
                 />
                 <div className="flex flex-col gap-5 mt-5 text-primary/70">
                   <p>Some of the best airlines are: </p>
+                  <span className="italic">
+                    Click on the names below to visit their websites.
+                  </span>
                   <p>
                     {airlines.map((airline, index) => (
                       <span
                         key={index}
                         className="hover:text-primaryGreen transition-all duration-300"
                       >
-                        <Link href={airline.href} target="_blank">{airline.name}</Link>
+                        <Link href={airline.href} target="_blank">
+                          {airline.name}
+                        </Link>
                         {index < airlines.length - 1 && ", "}
                         {(index + 1) % 6 === 0 && <br />}
                       </span>
