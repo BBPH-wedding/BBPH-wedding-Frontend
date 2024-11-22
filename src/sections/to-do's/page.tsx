@@ -5,7 +5,7 @@ import store from "../../../public/SHOPPING.jpeg";
 import restaurant from "../../../public/FOOD & COFFES.jpeg";
 import nightlife from "../../../public/NIGHT LIFE.jpeg";
 import turism from "../../../public/TURISM.jpeg";
-import vaova from "../../../public/VAOVa.png";
+import vaova from "../../../public/VAOVA.png";
 import Image from "next/image";
 import Link from "next/link";
 const restaurantimg = restaurant.src;
