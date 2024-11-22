@@ -13,7 +13,7 @@ const Hero = () => {
         style={{ backgroundImage: `url(${image})` }}
       >
         <div className="flex flex-col items-center">
-          <div className="flex mt-40 md:mt-80">
+          <div className="flex mt-40 md:mt-[30rem]">
             <div className="w-[14vw] h-0 border border-black mt-[10px] md:w-32" />
             <h1 className="text-[3vw] tracking-[0.5rem] mx-5 md:tracking-[1rem] md:mx-10 sm:text-[1rem] text-black">
               WEDDING PARTY

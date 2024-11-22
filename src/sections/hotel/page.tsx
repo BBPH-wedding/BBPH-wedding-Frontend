@@ -3,7 +3,6 @@ import Titles from "@/components/Titles";
 import Link from "next/link";
 
 const hotels = [
-  { name: "El Cielo Hotel Medellin", href: "https://www.elcielohotel.com/" },
   {
     name: "The Click Clack Hotel Medellin",
     href: "https://www.clickclackhotel.com",
@@ -23,23 +22,25 @@ const Hotel = () => {
           <p className="text-sm text-center mt-14 md:text-lg text-primary/70">
             All guests are required to coordinate their own transportation from
             and to the airport. <br /> For the wedding ceremony, there will be
-            shuttles going out of the following hotels at 15h on February 01.
+            shuttles going out of the following hotels at 15h on February 01.{" "}
+            <br />
+            <span className="italic">Click on the names below to visit their websites.</span>
           </p>
-          <p className="text-sm font-semibold text-center mt-14 md:text-lg text-primary/70">
+
+          <p className="flex justify-center gap-[7vw] text-sm font-semibold text-center md:gap-24 mt-14 md:text-lg text-primary/70">
             {hotels.map((hotel, index) => (
               <span
                 key={index}
-                className="hover:text-primaryGreen transition-all duration-300"
+                className="text-center transition-all duration-300 hover:text-primaryGreen"
               >
                 <Link href={hotel.href} target="_blank">
                   {hotel.name}
                 </Link>
-                {index < hotels.length - 1 && ", "}
-                {(index + 1) % 6 === 0 && <br />}
               </span>
             ))}
           </p>
-          <p className="text-xs text-center mt-8 md:text-sm text-primary/50">
+
+          <p className="mt-8 text-xs text-center md:text-sm text-primary/50">
             Use the code{" "}
             <span className="font-bold text-primaryGreen">
               &quot;REBEFEB2025MDENICO&quot;
@@ -48,7 +49,7 @@ const Hotel = () => {
             <Link
               href="https://www.clickclackhotel.com"
               target="_blank"
-              className="text-primaryGreen hover:underline ml-1"
+              className="ml-1 text-primaryGreen hover:underline"
             >
               The Click Clack Hotel Medellin
             </Link>
@@ -71,7 +72,11 @@ const Hotel = () => {
                 <p>
                   Ubers work well to get around town and for airport pick up.
                   <br /> To coordinate your transportation in advance,
-                  here&apos;s a company of trusted drivers you can contact:
+                  here&apos;s a company of trusted drivers you can contact:{" "}
+                  <br />
+                  <span className="italic">
+                    Click on the names below to visit their information pages.
+                  </span>
                 </p>
                 <p className="mt-5 font-semibold">
                   EC Transportes SAS / Raúl Vasquez <br />
@@ -95,7 +100,7 @@ const Hotel = () => {
                   <Link
                     href="https://www.instagram.com/portadamedellin/"
                     target="_blank"
-                    className="hover:text-primaryGreen transition-all duration-300"
+                    className="transition-all duration-300 hover:text-primaryGreen"
                   >
                     Portada Peluquería Medellín <br />
                   </Link>
@@ -109,7 +114,7 @@ const Hotel = () => {
                   <Link
                     href="https://www.instagram.com/claudialonpeluqueria/"
                     target="_blank"
-                    className="hover:text-primaryGreen transition-all duration-300"
+                    className="transition-all duration-300 hover:text-primaryGreen"
                   >
                     Claudia Londoño Peluquería <br />
                   </Link>
@@ -123,7 +128,7 @@ const Hotel = () => {
                   <Link
                     href="https://www.instagram.com/livanasalon/"
                     target="_blank"
-                    className="hover:text-primaryGreen transition-all duration-300"
+                    className="transition-all duration-300 hover:text-primaryGreen"
                   >
                     Livana Salóm <br />
                   </Link>
@@ -145,7 +150,7 @@ const Hotel = () => {
                   <Link
                     href="https://www.instagram.com/dianalopezmakeupstudio/"
                     target="_blank"
-                    className="hover:text-primaryGreen transition-all duration-300"
+                    className="transition-all duration-300 hover:text-primaryGreen"
                   >
                     Diana López Makeup Studio <br />
                   </Link>
@@ -158,7 +163,7 @@ const Hotel = () => {
                   <Link
                     href="https://www.instagram.com/emakeup_cools/"
                     target="_blank"
-                    className="hover:text-primaryGreen transition-all duration-300"
+                    className="transition-all duration-300 hover:text-primaryGreen"
                   >
                     Emaniel Garcia Cools <br />
                   </Link>
@@ -169,7 +174,7 @@ const Hotel = () => {
                   <Link
                     href="https://www.instagram.com/zarethmakeup/"
                     target="_blank"
-                    className="hover:text-primaryGreen transition-all duration-300"
+                    className="transition-all duration-300 hover:text-primaryGreen"
                   >
                     Zareth Makeup Studio <br />
                   </Link>
