@@ -84,6 +84,8 @@ const ModalEdit: React.FC<RegistrationFormProps> = ({
         if (!data) {
           return;
         }
+        console.log(data);
+        
         toast.success("Edited reservation successfully");
         setIsModalOpen(false);
       } catch (error) {

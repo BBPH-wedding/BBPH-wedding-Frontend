@@ -66,7 +66,7 @@ const FAQs = () => {
                 className="w-full text-black border-b-[2px] border-primaryGreen/70"
               >
                 <AccordionItem value={faq.question}>
-                  <AccordionTrigger className="text-sm uppercase md:text-lg">
+                  <AccordionTrigger className="text-sm uppercase md:text-lg text-primaryGreen">
                     {faq.question}
                   </AccordionTrigger>
                   <AccordionContent className="max-w-[45rem] text-primary">
