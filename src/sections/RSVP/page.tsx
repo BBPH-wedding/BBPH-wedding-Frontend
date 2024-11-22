@@ -9,8 +9,7 @@ const RSVP = () => {
         <div>
           <Titles title="RSVP" color="text-white" size="large" />
           <p className="mt-10 text-sm md:text-xl">
-            We want to share this long-awaited moment with you! Please help us
-            by RSVPing before March 1, 2025.
+            We want to share this long-awaited moment with you!
           </p>
         </div>
 

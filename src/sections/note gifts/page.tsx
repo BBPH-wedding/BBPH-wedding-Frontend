@@ -10,12 +10,11 @@ const Note = () => {
           </p>
           <p className="">
             If you would like to honor us with a gift, we truly appreciate any
-            contribution towards our future together. <br /> Your support will help us
-            as we start this exciting new chapter in our lives.
+            contribution towards our future together. <br /> Thank you for being
+            part of our celebration.
           </p>
           <p className="">
-            Thank you for being part of our celebration. We can’t wait to see
-            you and create unforgettable memories together.
+            We can’t wait to see you and create unforgettable memories together.
           </p>
         </div>
       </section>

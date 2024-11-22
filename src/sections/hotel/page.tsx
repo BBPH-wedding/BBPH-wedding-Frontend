@@ -16,7 +16,7 @@ const hotels = [
 const Hotel = () => {
   return (
     <>
-      <section className="h-auto pb-14 sm:pb-32 bg-[#F0EBE0] flex flex-col items-center justify-center text-center px-5 text-sm md:text-lg pt-28">
+      <section className="h-auto pb-14 sm:pb-32 bg-[#F0EBE0] flex flex-col items-center justify-center text-center px-5 text-sm md:text-lg pt-20">
         <div className="mb-20">
           <Titles title="Hotels" color="text-primaryGreen" size="large" />
           <p className="text-sm text-center mt-14 md:text-lg text-primary/70">
