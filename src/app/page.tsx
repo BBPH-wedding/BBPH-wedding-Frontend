@@ -9,6 +9,7 @@ import History from "@/sections/history/page";
 import Hotel from "@/sections/hotel/page";
 import Itinerary from "@/sections/itinerary/page";
 import Login from "@/sections/login/page";
+import Note from "@/sections/note gifts/page";
 import RSVP from "@/sections/RSVP/page";
 import ToDos from "@/sections/to-do's/page";
 import Travel from "@/sections/travel/page";
@@ -58,6 +59,7 @@ export default function Home() {
       <section id="travel">
         <Travel />
       </section>
+      <Note />
       <section id="recommendations">
         <Hotel />
       </section>
