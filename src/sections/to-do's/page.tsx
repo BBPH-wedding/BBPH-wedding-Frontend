@@ -34,7 +34,7 @@ const category: Category[] = [
     description:
       "Experience the best of Colombian cuisine at one of our favorite restaurants.",
     img: restaurantimg,
-    link: "https://maps.app.goo.gl/qY546ADRgrckkD3AA",
+    link: "https://maps.app.goo.gl/3sbEZFB9jXaBfLuq7",
   },
   {
     title: "NIGHTLIFE",
