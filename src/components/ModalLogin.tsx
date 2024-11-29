@@ -90,7 +90,7 @@ const ModalLogin = () => {
       <Toaster />
       <Dialog open={isLoginModalOpen} onOpenChange={setIsLoginModalOpen}>
         <DialogTrigger asChild>
-          <Button className="w-full">Edit reservation</Button>
+          <Button className="w-full">EDIT RESERVATION</Button>
         </DialogTrigger>
         <DialogContent className="bg-[#F0EBE0] rounded-lg text-black">
           <DialogHeader>
@@ -119,7 +119,7 @@ const ModalLogin = () => {
                 {...formik.getFieldProps("email")}
               />
               {formik.touched.email && formik.errors.email && (
-                <div className="mt-2 text-sm text-red-600">
+                <div className="absolute mt-2 text-sm text-red-600">
                   {formik.errors.email}
                 </div>
               )}
@@ -140,7 +140,7 @@ const ModalLogin = () => {
                 {...formik.getFieldProps("password")}
               />
               {formik.touched.password && formik.errors.password && (
-                <div className="mt-2 text-sm text-red-600">
+                <div className="absolute mt-2 text-sm text-red-600">
                   {formik.errors.password}
                 </div>
               )}
@@ -163,7 +163,7 @@ const ModalLogin = () => {
                   setIsResetPasswordModalOpen(true);
                   setIsLoginModalOpen(false);
                 }}
-                className="px-4 py-2 text-sm font-medium transition-colors duration-200 transform border border-blue-600 rounded-lg text-white bg-blue-700 hover:bg-blue-800"
+                className="px-4 py-2 text-sm font-medium text-white transition-colors duration-200 transform bg-blue-700 border border-blue-600 rounded-lg hover:bg-blue-800"
               >
                 Forgot password?
               </button>

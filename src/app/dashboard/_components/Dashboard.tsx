@@ -42,7 +42,7 @@ const Dashboard = () => {
   const { reservations, setReservations } = useReservationDashboardStore();
   const [isLoading, setIsLoading] = useState(false);
   const [currentStatus, setCurrentStatus] = useState(null as string | null);
-
+  const [totalReservations, setTotalReservations] = useState(0);
   const [selectedReservation, setSelectedReservation] =
     useState<ReservationFormValues | null>(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -71,6 +71,7 @@ const Dashboard = () => {
       if (data) {
         setReservations(data.data);
         setTotalPages(data.meta.lastPage);
+        setTotalReservations(data.meta.total);
         setCurrentPage(page);
         setCurrentStatus(status);
       }
@@ -133,16 +134,19 @@ const Dashboard = () => {
     <>
       <section className="h-screen bg-white">
         <Card className="w-full mx-auto border-none shadow-none">
-          <CardHeader className="flex flex-row items-center justify-between">
+          <CardHeader className="flex flex-row flex-wrap items-center justify-between">
             <div className="flex flex-col items-center mt-10">
               <CardTitle>Dashboard of Reservations</CardTitle>
               <p className="w-full mt-3 text-lg italic">
                 List of {currentStatus} Reservations
               </p>
+              <p className="w-full mt-3 text-sm italic">
+                Total Reservations: {totalReservations}
+              </p>
             </div>
             <div className="flex flex-col items-center gap-4 md:flex-row">
               <Select onValueChange={handleStatusChange} defaultValue="all">
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-[180px] sm:mt-0 mt-10">
                   <SelectValue placeholder="Filter Reservations" />
                 </SelectTrigger>
                 <SelectContent>
@@ -231,13 +235,18 @@ const Dashboard = () => {
                             variant={
                               reserve.status === "Confirmed"
                                 ? "success"
+                                : reserve.status === "Pending"
+                                ? "warning"
                                 : "destructive"
                             }
-                            className="text-xs sm:text-sm"
+                            className="text-xs text-center sm:text-sm"
                           >
+                            {" "}
                             {reserve.status === "Confirmed"
                               ? "Going"
-                              : "Not Going"}
+                              : reserve.status === "Pending"
+                              ? "Pending"
+                              : "Not Going"}{" "}
                           </Badge>
                         </TableCell>
                         <TableCell>

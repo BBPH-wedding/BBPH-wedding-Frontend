@@ -1,8 +1,15 @@
 const Note = () => {
   return (
     <>
-      <section className="w-auto sm:h-[35rem] h-auto bg-primaryGreen">
-        <div className="flex flex-col items-center justify-center h-full gap-10 py-10 mx-10 text-sm text-center sm:text-xl text-white font-[silk]">
+      <section
+        className="w-auto sm:h-[35rem] h-auto bg-primaryGreen bg-cover"
+        style={{
+          backgroundImage: `url('/BEKKY WALL resized.png')`,
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <div className="flex flex-col items-center justify-center h-full gap-10 py-10 mx-10 text-sm text-center sm:text-2xl text-white font-[silk]">
           <p className="">
             Dear all, <br />
             Your presence at our wedding is the greatest gift we could ever ask
