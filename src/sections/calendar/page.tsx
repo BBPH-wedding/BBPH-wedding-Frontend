@@ -39,11 +39,18 @@ const Calendar = () => {
     window.open(
       "https://calendar.google.com/calendar/u/0/r/eventedit?dates=20250131T160000Z/20250131T235959Z&text=Wedding+Party+of+Bekky+%26+Nicolas&details=Join+us+to+celebrate+the+love+of+Bekky+and+Nicolas.",
       "_blank"
-    ); 
+    );
   };
 
   return (
-    <section className="flex flex-col items-center justify-center h-auto py-24 text-center bg-primaryGreen">
+    <section
+      className="flex flex-col items-center justify-center h-auto py-24 text-center bg-primaryGreen bg-cover"
+      style={{
+        backgroundImage: `url('/BEKKY WALL.png')`,
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <div className="mx-[1rem]">
         <div>
           <Titles title="Our Day" />

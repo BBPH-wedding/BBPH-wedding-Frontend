@@ -52,7 +52,6 @@ export default function Home() {
       <section id="calendar">
         <Calendar />
       </section>
-      <div className="bg-[#F0EBE0] h-40"></div>
       <section id="itinerary">
         <Itinerary />
       </section>
@@ -69,12 +68,12 @@ export default function Home() {
       <section id="rsvp">
         <RSVP />
       </section>
-      <section id="faqs">
-        <FAQs />
-      </section>
-      <section id="gallery">
-        <Gallery />
-      </section>
+        <section id="faqs">
+          <FAQs />
+        </section>
+        <section id="gallery">
+          <Gallery />
+        </section>
       <Footer />
     </>
   );

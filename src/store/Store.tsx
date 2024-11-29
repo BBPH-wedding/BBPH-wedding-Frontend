@@ -1,4 +1,3 @@
-
 import { create } from "zustand";
 
 interface ReservationState {
@@ -11,8 +10,6 @@ export const useReservationStore = create<ReservationState>((set) => ({
   setUserEmail: (email) => set({ userEmail: email }),
 }));
 
-
-
 interface TokenState {
   token: string;
   setToken: (token: string) => void;
@@ -22,9 +19,6 @@ export const useTokenStore = create<TokenState>((set) => ({
   token: "",
   setToken: (token) => set({ token }),
 }));
-
-
-
 
 interface AuthModalState {
   isAuthModalOpen: boolean;
@@ -36,10 +30,6 @@ export const useAuthModalStore = create<AuthModalState>((set) => ({
   setIsAuthModalOpen: (isOpen) => set({ isAuthModalOpen: isOpen }),
 }));
 
-
-
-
-
 interface CodeModalState {
   isCodeModalOpen: boolean;
   setIsCodeModalOpen: (isOpen: boolean) => void;
@@ -49,10 +39,6 @@ export const useCodeModalStore = create<CodeModalState>((set) => ({
   isCodeModalOpen: false,
   setIsCodeModalOpen: (isOpen) => set({ isCodeModalOpen: isOpen }),
 }));
-
-
-
-
 
 interface FormModalState {
   isFormModalOpen: boolean;
@@ -64,13 +50,10 @@ export const useFormModalStore = create<FormModalState>((set) => ({
   setIsFormModalOpen: (isOpen) => set({ isFormModalOpen: isOpen }),
 }));
 
-
-
 export const useTokenLoginStore = create<TokenState>((set) => ({
   token: "",
   setToken: (token) => set({ token }),
 }));
-
 
 interface LoginModalState {
   isLoginModalOpen: boolean;
@@ -82,7 +65,6 @@ export const useLoginModalStore = create<LoginModalState>((set) => ({
   setIsLoginModalOpen: (isOpen) => set({ isLoginModalOpen: isOpen }),
 }));
 
-
 interface EditModalState {
   isEditModalOpen: boolean;
   setIsEditModalOpen: (isOpen: boolean) => void;
@@ -93,7 +75,6 @@ export const useEditModalStore = create<EditModalState>((set) => ({
   setIsEditModalOpen: (isOpen) => set({ isEditModalOpen: isOpen }),
 }));
 
-
 interface LoginEmailState {
   userEmailLogin: string;
   setUserEmailLogin: (email: string) => void;
@@ -103,3 +84,27 @@ export const useEmailLoginStore = create<LoginEmailState>((set) => ({
   userEmailLogin: "",
   setUserEmailLogin: (email) => set({ userEmailLogin: email }),
 }));
+
+interface peopleComing {
+  firstName: string;
+  lastName: string;
+}
+ export interface ReservationDash {
+  email: string;
+  phoneNumber: string;
+  peopleComing: peopleComing[];
+  notes: string;
+  status: string;
+}
+
+interface ReservationDashboardStore {
+  reservations: ReservationDash[];
+  setReservations: (reservations: ReservationDash[]) => void;
+}
+
+export const useReservationDashboardStore = create<ReservationDashboardStore>(
+  (set) => ({
+    reservations: [],
+    setReservations: (reservations) => set({ reservations }),
+  })
+);

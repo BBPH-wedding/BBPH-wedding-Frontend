@@ -93,7 +93,7 @@ interface Person {
   lastName: string;
 }
 interface CompleteReservation {
-  token: string;
+  token: string | null;
   email: string;
   status: string;
   notes: string;

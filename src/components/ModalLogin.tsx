@@ -20,7 +20,8 @@ import {
   useTokenLoginStore,
 } from "@/store/Store";
 import ModalEdit from "./EditModal";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import ModalResetPassword from "./ModalResetPassword";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -44,6 +45,9 @@ const ModalLogin = () => {
   const { setToken } = useTokenLoginStore();
   const { setIsLoginModalOpen, isLoginModalOpen } = useLoginModalStore();
   const { setIsEditModalOpen, isEditModalOpen } = useEditModalStore();
+
+  const [isResetPasswordModalOpen, setIsResetPasswordModalOpen] =
+    useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -151,13 +155,31 @@ const ModalLogin = () => {
             >
               {formik.isSubmitting ? "LOGGING IN..." : "LOGIN"}
             </Button>
+
+            <div className="flex justify-center mt-4">
+              <button
+                type="button"
+                onClick={() => {
+                  setIsResetPasswordModalOpen(true);
+                  setIsLoginModalOpen(false);
+                }}
+                className="px-4 py-2 text-sm font-medium transition-colors duration-200 transform border border-blue-600 rounded-lg text-white bg-blue-700 hover:bg-blue-800"
+              >
+                Forgot password?
+              </button>
+            </div>
           </form>
         </DialogContent>
       </Dialog>
-      
+
       <ModalEdit
         isModalOpen={isEditModalOpen}
         setIsModalOpen={setIsEditModalOpen}
+      />
+
+      <ModalResetPassword
+        isResetPasswordModalOpen={isResetPasswordModalOpen}
+        setIsResetPasswordModalOpen={setIsResetPasswordModalOpen}
       />
     </>
   );

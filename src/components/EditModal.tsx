@@ -62,7 +62,7 @@ const ModalEdit: React.FC<RegistrationFormProps> = ({
   setIsModalOpen,
 }) => {
   const { token } = useTokenLoginStore();
-  const { userEmailLogin } = useEmailLoginStore();
+  const { userEmailLogin } = useEmailLoginStore(); 
   const [memberCount, setMemberCount] = useState(1);
 
   const formik = useFormik<Formvalues>({

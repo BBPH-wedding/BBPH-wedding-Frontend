@@ -43,7 +43,7 @@ const faqs: Faq[] = [
 const FAQs = () => {
   return (
     <>
-      <section className="h-auto pt-14 sm:pt-32 bg-[#F0EBE0] flex flex-col items-center justify-center text-center px-5 text-sm md:text-lg">
+      <section className="h-auto pt-14 sm:pt-32 bg-[#f1f2ec] flex flex-col items-center justify-center text-center px-5 text-sm md:text-lg">
         <div className="mb-20">
           <Titles title="Faq's" color="text-primaryGreen" size="large" />
           <p className="text-sm text-center mt-14 md:text-lg text-primary/70">
