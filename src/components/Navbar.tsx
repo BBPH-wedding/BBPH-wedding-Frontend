@@ -16,7 +16,7 @@ const navItems: NavItem[] = [
   { id: "recommendations", label: "Recommendations" },
   { id: "things-to-do", label: "Things to do" },
   { id: "rsvp", label: "RSVP" },
-  { id: "faqs", label: "FAQS" },
+  { id: "faqs", label: "FAQs" },
   { id: "gallery", label: "Gallery" },
 ];
 

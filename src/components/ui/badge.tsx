@@ -17,6 +17,8 @@ const badgeVariants = cva(
         outline: "text-neutral-950 dark:text-neutral-50",
         success:
           "border-transparent bg-green-500 text-neutral-50 hover:bg-green-500/80 dark:bg-green-900 dark:text-neutral-50 dark:hover:bg-green-900/80",
+          warning:
+          "border-none bg-yellow-300 text-neutral-50 hover:bg-yellow-500/80 dark border-neutral-800 ",
       },
     },
     defaultVariants: {
