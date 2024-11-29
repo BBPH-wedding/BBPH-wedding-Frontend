@@ -43,7 +43,7 @@ const events: Event[] = [
 
 const Itinerary = () => {
   return (
-    <section className="h-auto py-14 sm:py-32 bg-[#F0EBE0] flex flex-col items-center justify-center text-center px-5 text-sm md:text-lg">
+    <section className="h-auto py-14 sm:py-32 bg-[#f1f2ec] flex flex-col items-center justify-center text-center px-5 text-sm md:text-lg">
       <div className="mb-20">
         <Titles title="Itinerary" color="text-primaryGreen" size="large" />
       </div>

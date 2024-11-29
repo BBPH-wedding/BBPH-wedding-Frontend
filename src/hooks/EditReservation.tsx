@@ -87,3 +87,23 @@ export const GetReservation = async ({ email, token }: GetReservation) => {
     return null;
   }
 };
+
+export const RequestPasswordReset = async (email: string) => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/reservations/request-reset/${email}`
+    );
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+      return null;
+    }
+
+    return response.text();
+  } catch (error) {
+    if (process.env.NODE_ENV === "development") {
+      console.warn("Error in RequestPasswordReset:", error);
+    }
+    return null;
+  }
+};
