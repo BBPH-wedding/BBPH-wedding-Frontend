@@ -44,7 +44,7 @@ const Calendar = () => {
 
   return (
     <section
-      className="flex flex-col items-center justify-center h-auto py-24 text-center bg-cover bg-primaryGreen"
+      className="flex flex-col items-center justify-center h-auto py-24 text-center bg-cover bg-[#f1f2ec]"
       style={{
         backgroundImage: `url('/BEKKY WALL resized.png')`,
         backgroundPosition: "center",

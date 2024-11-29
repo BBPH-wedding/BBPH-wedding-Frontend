@@ -2,7 +2,7 @@ const Note = () => {
   return (
     <>
       <section
-        className="w-auto sm:h-[35rem] h-auto bg-primaryGreen bg-cover"
+        className="w-auto sm:h-[35rem] h-auto bg-[#f1f2ec] bg-cover"
         style={{
           backgroundImage: `url('/BEKKY WALL resized.png')`,
           backgroundPosition: "center",
