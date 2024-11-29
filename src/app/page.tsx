@@ -69,16 +69,22 @@ export default function Home() {
         <RSVP />
       </section>
 
-      <div className="relative">
-        <img src="/BEKKY PLANT.png" alt="Bekky Wall" className="absolute top-[-38.5rem] left-[-48rem] w-[67vw]" />
+      <div className="relative" id="faqs">
+        <img
+          src="/BEKKY PLANT.png"
+          alt="Bekky Wall"
+          className="absolute top-[-38.5rem] left-[-48rem] w-[67vw]"
+        />
         <section id="faqs">
           <FAQs />
         </section>
-        <section id="gallery">
-          <Gallery />
-        </section>
       </div>
-      <Footer />
+      <section id="gallery">
+        <Gallery />
+      </section>
+      <div>
+        <Footer />
+      </div>
     </>
   );
 }
