@@ -9,9 +9,17 @@ const PrincipalDashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const authStatus = localStorage.getItem("TokenAdmin");
-    if (authStatus) {
+    const token = localStorage.getItem("TokenAdmin");
+    const expiration = localStorage.getItem("TokenAdminExpiration");
+    const now = new Date().getTime();
+  
+    if (token && expiration && now < parseInt(expiration)) {
       setIsAuthenticated(true);
+    } else {
+      localStorage.removeItem("TokenAdmin");
+      localStorage.removeItem("TokenAdminExpiration");
+      localStorage.removeItem("isAuthenticatedAdmin");
+      setIsAuthenticated(false);
     }
     setIsLoading(true);
   }, []);
