@@ -1,5 +1,6 @@
 "use client";
 
+import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -10,7 +11,7 @@ interface LoginProps {
 const Login = ({ onAuthenticate }: LoginProps) => {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,14 +33,22 @@ const Login = ({ onAuthenticate }: LoginProps) => {
     if (response.ok) {
       const data = await response.text();
       if (data) {
+        const expirationTime = new Date().getTime() + 12 * 60 * 60 * 1000;
         localStorage.setItem("isAuthenticatedAdmin", "true");
         localStorage.setItem("TokenAdmin", data);
+        localStorage.setItem("TokenAdminExpiration", expirationTime.toString());
         onAuthenticate(true);
       } else {
         toast.error("Incorrect email or password!");
       }
     } else {
       toast.error("Incorrect email or password!");
+    }
+  };
+
+  const togglePasswordVisibility = (field: string) => {
+    if (field === "newPassword") {
+      setShowPassword(!showPassword);
     }
   };
 
@@ -82,7 +91,7 @@ const Login = ({ onAuthenticate }: LoginProps) => {
               className="flex flex-col items-center w-full max-w-md gap-5"
             >
               <label className="font-semibold font-[poppins]">Username</label>
-              <input 
+              <input
                 className="w-full px-5 py-3 text-xl text-black border rounded-md focus:outline-none"
                 type="text"
                 value={username}
@@ -90,14 +99,27 @@ const Login = ({ onAuthenticate }: LoginProps) => {
                 required
               />
               <label className="font-semibold font-[poppins]">Password</label>
-              <input
-                className="w-full px-5 py-3 text-xl text-black border rounded-md focus:outline-none"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-
+              <div className="relative w-full">
+                <input
+                  id="newPassword"
+                  className="w-full px-5 py-3 text-xl text-black border rounded-md focus:outline-none"
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <button
+                  type="button"
+                  className="absolute inset-y-0 right-0 flex items-center px-3"
+                  onClick={() => togglePasswordVisibility("newPassword")}
+                >
+                  {showPassword ? (
+                    <EyeOff className="h-5 w-5 text-gray-500" />
+                  ) : (
+                    <Eye className="h-5 w-5 text-gray-500" />
+                  )}
+                </button>
+              </div>
               <button
                 className="px-10 py-3 text-lg transition-all duration-300 border border-primaryGreen hover:bg-primaryGreen font-[poppins] rounded-md"
                 type="submit"
