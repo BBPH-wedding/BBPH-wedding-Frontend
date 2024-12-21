@@ -15,7 +15,7 @@ const events: Event[] = [
     title: "Wedding Cocktail Party",
     location: "The Click Clack Hotel Medellín / La Deriva Rooftop",
     dressCode: "Casual",
-    time: "5:00 PM - 11:00 PM",
+    time: "4:00 PM - 9:00 PM",
     date: "Friday, January 31 / 2025",
     line: true,
   },
