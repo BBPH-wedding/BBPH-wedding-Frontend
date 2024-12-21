@@ -15,7 +15,7 @@ const Calendar = () => {
 
   useEffect(() => {
     const calculateTimeLeft = () => {
-      const targetDate = new Date("2025-02-01T00:00:00-05:00");
+      const targetDate = new Date("2025-01-31T11:00:00-05:00");
       const now = new Date();
       const difference = targetDate.getTime() - now.getTime();
 
@@ -37,17 +37,24 @@ const Calendar = () => {
 
   const handleCalendarRedirect = () => {
     window.open(
-      "https://calendar.google.com/calendar/u/0/r/eventedit?dates=20250201T000000Z/20250201T235959Z&text=Wedding+Party+of+Bekky+%26+Nicolas&details=Join+us+to+celebrate+the+love+of+Bekky+and+Nicolas.+Dress+code%3A+formal+attire+and+get+ready+for+a+night+of+dancing%2C+laughter%2C+and+unforgettable+memories.",
+      "https://calendar.google.com/calendar/u/0/r/eventedit?dates=20250131T160000Z/20250131T235959Z&text=Wedding+Party+of+Bekky+%26+Nicolas&details=Join+us+to+celebrate+the+love+of+Bekky+and+Nicolas.",
       "_blank"
     );
   };
 
   return (
-    <section className="flex flex-col items-center justify-center h-auto py-24 text-center bg-primaryGreen">
+    <section
+      className="flex flex-col items-center justify-center h-auto py-24 text-center bg-cover bg-[#f1f2ec]"
+      style={{
+        backgroundImage: `url('/BEKKY WALL resized.png')`,
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <div className="mx-[1rem]">
         <div>
           <Titles title="Our Day" />
-          <p className="mt-5 text-sm md:text-xl">Saturday, February 1st, 2025</p>
+          <p className="mt-5 text-sm md:text-xl">Friday, January 31st, 2025</p>
         </div>
 
         <div className="flex gap-x-[5vw] mt-28 lg:gap-x-[11vw] sm:flex-nowrap flex-wrap justify-center ml-[4.5vw]">

@@ -20,6 +20,8 @@ import {
   useTokenLoginStore,
 } from "@/store/Store";
 import ModalEdit from "./EditModal";
+import { useEffect, useState } from "react";
+import ModalResetPassword from "./ModalResetPassword";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -43,6 +45,9 @@ const ModalLogin = () => {
   const { setToken } = useTokenLoginStore();
   const { setIsLoginModalOpen, isLoginModalOpen } = useLoginModalStore();
   const { setIsEditModalOpen, isEditModalOpen } = useEditModalStore();
+
+  const [isResetPasswordModalOpen, setIsResetPasswordModalOpen] =
+    useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -74,12 +79,18 @@ const ModalLogin = () => {
     },
   });
 
+  useEffect(() => {
+    if (!isLoginModalOpen) {
+      formik.resetForm();
+    }
+  }, [isLoginModalOpen]);
+
   return (
     <>
       <Toaster />
       <Dialog open={isLoginModalOpen} onOpenChange={setIsLoginModalOpen}>
         <DialogTrigger asChild>
-          <Button className="w-full">Edit reservation</Button>
+          <Button className="w-full">EDIT RESERVATION</Button>
         </DialogTrigger>
         <DialogContent className="bg-[#F0EBE0] rounded-lg text-black">
           <DialogHeader>
@@ -108,7 +119,7 @@ const ModalLogin = () => {
                 {...formik.getFieldProps("email")}
               />
               {formik.touched.email && formik.errors.email && (
-                <div className="mt-2 text-sm text-red-600">
+                <div className="absolute mt-2 text-sm text-red-600">
                   {formik.errors.email}
                 </div>
               )}
@@ -129,7 +140,7 @@ const ModalLogin = () => {
                 {...formik.getFieldProps("password")}
               />
               {formik.touched.password && formik.errors.password && (
-                <div className="mt-2 text-sm text-red-600">
+                <div className="absolute mt-2 text-sm text-red-600">
                   {formik.errors.password}
                 </div>
               )}
@@ -144,13 +155,31 @@ const ModalLogin = () => {
             >
               {formik.isSubmitting ? "LOGGING IN..." : "LOGIN"}
             </Button>
+
+            <div className="flex justify-center mt-4">
+              <button
+                type="button"
+                onClick={() => {
+                  setIsResetPasswordModalOpen(true);
+                  setIsLoginModalOpen(false);
+                }}
+                className="px-4 py-2 text-sm font-medium text-white transition-colors duration-200 transform bg-blue-700 border border-blue-600 rounded-lg hover:bg-blue-800"
+              >
+                Forgot password?
+              </button>
+            </div>
           </form>
         </DialogContent>
       </Dialog>
-      
+
       <ModalEdit
         isModalOpen={isEditModalOpen}
         setIsModalOpen={setIsEditModalOpen}
+      />
+
+      <ModalResetPassword
+        isResetPasswordModalOpen={isResetPasswordModalOpen}
+        setIsResetPasswordModalOpen={setIsResetPasswordModalOpen}
       />
     </>
   );

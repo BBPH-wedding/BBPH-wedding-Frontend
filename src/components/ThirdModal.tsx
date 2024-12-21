@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -28,11 +28,6 @@ interface RegistrationFormProps {
   setIsModalOpen: (open: boolean) => void;
 }
 
-interface MemberInput {
-  firstName: string;
-  lastName: string;
-}
-
 interface Formvalues {
   phoneNumber: string;
   peopleComing: { firstName: string; lastName: string }[];
@@ -56,7 +51,7 @@ const validationSchema = Yup.object().shape({
     })
   ),
   status: Yup.string().required("Please select an event status"),
-  notes: Yup.string(),
+  notes: Yup.string().max(250, "Notes must be at most 250 characters"),
 });
 
 const RegistrationForm: React.FC<RegistrationFormProps> = ({
@@ -99,22 +94,25 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
     },
   });
 
-  useEffect(() => {
-    const newPeopleComing: MemberInput[] = Array(memberCount)
-      .fill(null)
-      .map(() => ({ firstName: "", lastName: "" }));
-    formik.setFieldValue("peopleComing", newPeopleComing);
-  }, [memberCount]);
-
   const handleIncrement = () => {
     if (memberCount < 5) {
       setMemberCount((prev) => prev + 1);
+
+      formik.setFieldValue("peopleComing", [
+        ...formik.values.peopleComing,
+        { firstName: "", lastName: "" },
+      ]);
     }
   };
 
   const handleDecrement = () => {
     if (memberCount > 1) {
       setMemberCount((prev) => prev - 1);
+
+      formik.setFieldValue(
+        "peopleComing",
+        formik.values.peopleComing.slice(0, -1)
+      );
     }
   };
 
@@ -266,7 +264,18 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
               onValueChange={(value) => formik.setFieldValue("status", value)}
               value={formik.values.status}
             >
-              <SelectTrigger className="w-full border-none rounded-none shadow-none p-9 bg-white/70 focus:outline-none">
+              <SelectTrigger
+                className={`
+        w-full border-2 p-9 rounded-none shadow-none bg-white/70 focus:outline-none 
+        ${
+          formik.values.status === "Confirmed"
+            ? "border-green-800"
+            : formik.values.status === "Not Going"
+            ? "border-orange-300"
+            : "border-gray-300"
+        }
+      `}
+              >
                 <SelectValue placeholder="Select event status" />
               </SelectTrigger>
               <SelectContent>
@@ -293,17 +302,20 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
               value={formik.values.notes}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              placeholder="Write any important notes here..."
+              placeholder="Enter any important notes such as allergies, disabilities, or special considerations for the event."
               className="w-full p-5 bg-white/70 focus:outline-none"
             />
+            {formik.touched.notes && formik.errors.notes && (
+              <div className="mt-1 text-sm text-red-500">
+                {formik.errors.notes}
+              </div>
+            )}
           </div>
 
           <Button
             type="submit"
             className="w-full md:w-full hover:bg-white disabled:cursor-not-allowed"
-            disabled={
-              formik.isSubmitting || Object.keys(formik.errors).length > 0
-            }
+            disabled={formik.isSubmitting}
           >
             {formik.isSubmitting ? "CONFIRMING..." : "CONFIRM"}
           </Button>

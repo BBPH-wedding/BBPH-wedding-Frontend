@@ -19,14 +19,12 @@ import {
 } from "@/components/ui/select";
 import { Minus, Plus } from "lucide-react";
 import Button from "./Button";
-import {
-  useEmailLoginStore,
-  useTokenLoginStore,
-} from "@/store/Store";
+import { useEmailLoginStore, useTokenLoginStore } from "@/store/Store";
 import { useFormik } from "formik";
 import { completeReservation } from "@/hooks/CreateReservation";
 import toast from "react-hot-toast";
 import * as Yup from "yup";
+import { GetReservation } from "@/hooks/EditReservation";
 
 interface RegistrationFormProps {
   isModalOpen: boolean;
@@ -56,7 +54,7 @@ const validationSchema = Yup.object().shape({
     })
   ),
   status: Yup.string().required("Please select an event status"),
-  notes: Yup.string(),
+  notes: Yup.string().max(250, "Notes must be at most 250 characters"),
 });
 
 const ModalEdit: React.FC<RegistrationFormProps> = ({
@@ -64,7 +62,7 @@ const ModalEdit: React.FC<RegistrationFormProps> = ({
   setIsModalOpen,
 }) => {
   const { token } = useTokenLoginStore();
-  const { userEmailLogin } = useEmailLoginStore();
+  const { userEmailLogin } = useEmailLoginStore(); 
   const [memberCount, setMemberCount] = useState(1);
 
   const formik = useFormik<Formvalues>({
@@ -86,7 +84,7 @@ const ModalEdit: React.FC<RegistrationFormProps> = ({
         if (!data) {
           return;
         }
-        toast.success("Registration completed successfully");
+        toast.success("Edited reservation successfully");
         setIsModalOpen(false);
       } catch (error) {
         if (process.env.NODE_ENV === "development") {
@@ -102,7 +100,7 @@ const ModalEdit: React.FC<RegistrationFormProps> = ({
   const handleIncrement = () => {
     if (memberCount < 5) {
       setMemberCount((prev) => prev + 1);
-      // Mantener los valores existentes y agregar uno nuevo
+
       formik.setFieldValue("peopleComing", [
         ...formik.values.peopleComing,
         { firstName: "", lastName: "" },
@@ -113,7 +111,7 @@ const ModalEdit: React.FC<RegistrationFormProps> = ({
   const handleDecrement = () => {
     if (memberCount > 1) {
       setMemberCount((prev) => prev - 1);
-      // Mantener todos los valores excepto el último
+
       formik.setFieldValue(
         "peopleComing",
         formik.values.peopleComing.slice(0, -1)
@@ -124,27 +122,27 @@ const ModalEdit: React.FC<RegistrationFormProps> = ({
   useEffect(() => {
     const fetchReservationData = async () => {
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/reservations/${userEmailLogin}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        const data = await response.json();
-
-        setMemberCount(data.peopleComing.length);
-
-        formik.setValues({
-          phoneNumber: data.phoneNumber,
-          peopleComing: data.peopleComing,
-          notes: data.notes,
-          status: data.status,
+        const response = await GetReservation({
+          email: userEmailLogin,
+          token: token,
         });
+
+        const data = response;
+
+        if (data.peopleComing.length === 0) {
+          setMemberCount(1);
+          formik.setFieldValue("peopleComing", [
+            { firstName: "", lastName: "" },
+          ]);
+        } else {
+          setMemberCount(data.peopleComing.length);
+          formik.setValues({
+            phoneNumber: data.phoneNumber,
+            peopleComing: data.peopleComing,
+            notes: data.notes,
+            status: data.status,
+          });
+        }
       } catch (error) {
         if (process.env.NODE_ENV === "development") {
           console.warn("Error fetching reservation data:", error);
@@ -306,7 +304,18 @@ const ModalEdit: React.FC<RegistrationFormProps> = ({
               onValueChange={(value) => formik.setFieldValue("status", value)}
               value={formik.values.status}
             >
-              <SelectTrigger className="w-full border-none rounded-none shadow-none p-9 bg-white/70 focus:outline-none">
+              <SelectTrigger
+                className={`
+        w-full border-2 p-9 rounded-none shadow-none bg-white/70 focus:outline-none 
+        ${
+          formik.values.status === "Confirmed"
+            ? "border-green-800"
+            : formik.values.status === "Not Going"
+            ? "border-orange-300"
+            : "border-gray-300"
+        }
+      `}
+              >
                 <SelectValue placeholder="Select event status" />
               </SelectTrigger>
               <SelectContent>
@@ -323,7 +332,6 @@ const ModalEdit: React.FC<RegistrationFormProps> = ({
               </div>
             )}
           </div>
-
           <div className="space-y-2">
             <label className="block mb-3 text-sm font-semibold text-black md:text-lg">
               Important Notes
@@ -333,9 +341,14 @@ const ModalEdit: React.FC<RegistrationFormProps> = ({
               value={formik.values.notes}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              placeholder="Write any important notes here..."
+              placeholder="Enter any important notes such as allergies, disabilities, or special considerations for the event."
               className="w-full p-5 bg-white/70 focus:outline-none"
             />
+            {formik.touched.notes && formik.errors.notes && (
+              <div className="mt-1 text-sm text-red-500">
+                {formik.errors.notes}
+              </div>
+            )}
           </div>
 
           <Button

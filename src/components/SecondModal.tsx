@@ -16,7 +16,7 @@ import {
   useReservationStore,
   useTokenStore,
 } from "@/store/Store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const validationSchema = Yup.object().shape({
   confirmationToken: Yup.string()
@@ -38,31 +38,59 @@ const SecondModal: React.FC<SecondModalProps> = ({
   const { setToken } = useTokenStore();
   const [isButtonDisabled, setButtonDisabled] = useState(false);
   const [timeLeft, setTimeLeft] = useState(0);
+  const [attempt, setAttempt] = useState(0);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout | null = null;
+
+    if (timeLeft > 0) {
+      timer = setInterval(() => {
+        setTimeLeft((prevTime) => {
+          if (prevTime <= 1) {
+            clearInterval(timer!);
+            setButtonDisabled(false);
+            return 0;
+          }
+          return prevTime - 1;
+        });
+      }, 1000);
+    }
+
+    return () => {
+      if (timer) {
+        clearInterval(timer);
+      }
+    };
+  }, [timeLeft]);
+
+  const handleDisabled = () => {
+    if (attempt === 5) {
+      setIsCodeModalOpen(false);
+      setAttempt(0);
+      toast.error("Too many attempts");
+      return null;
+    } else {
+      handleResend();
+      setButtonDisabled(true);
+      setAttempt((prev) => prev + 1);
+      setTimeLeft(50);
+    }
+  };
+
+  const handleDisabledImmediately = () => {
+    setButtonDisabled(true);
+    setTimeLeft(50);
+  };
+
+  useEffect(() => {
+    if (isCodeModalOpen) {
+      handleDisabledImmediately();
+    }
+  }, [isCodeModalOpen]);
 
   const handleResend = () => {
     resendCode({ email: userEmail });
     toast.success("Code resent successfully");
-  };
-
-  const handleDisabled = () => {
-    handleResend();
-    setButtonDisabled(true);
-    setTimeLeft(25);
-
-    const timer = setInterval(() => {
-      setTimeLeft((prevTime) => {
-        if (prevTime <= 1) {
-          clearInterval(timer);
-          setButtonDisabled(false);
-          return 0;
-        }
-        return prevTime - 1;
-      });
-    }, 1000);
-
-    setTimeout(() => {
-      setButtonDisabled(false);
-    }, 25000);
   };
 
   const formik = useFormik({
@@ -124,7 +152,7 @@ const SecondModal: React.FC<SecondModalProps> = ({
                 </label>
                 <div className="flex flex-col justify-center w-full">
                   <CodeInput
-                    className={`w-full p-5 bg-white/70 focus:outline-none ${
+                    className={`bg-white/70 focus:outline-none ${
                       formik.touched.confirmationToken &&
                       formik.errors.confirmationToken
                         ? "border-2 border-red-500"
@@ -153,11 +181,10 @@ const SecondModal: React.FC<SecondModalProps> = ({
                 {formik.isSubmitting ? "SENDING CODE..." : "SEND CODE"}
               </Button>
 
-              
               <div className="flex items-center justify-center w-full !mt-5">
                 <button
                   type="button"
-                  className={`w-40 p-2 text-white font-semibold text-sm tracking-[0.3px] transition-all duration-300 rounded-full 
+                  className={`w-40 p-2 text-white font-semibold text-sm tracking-[0.3px] transition-all duration-300
         ${
           isButtonDisabled
             ? "bg-gray-400 cursor-not-allowed"

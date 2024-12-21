@@ -17,6 +17,11 @@
   src: url(../app/fonts/Cormorant-Regular.ttf);
 }
 
+@font-face {
+  font-family: "poppins";
+  src: url(../app/fonts/Poppins-Thin.ttf);
+}
+
 * {
   margin: 0;
   padding: 0;

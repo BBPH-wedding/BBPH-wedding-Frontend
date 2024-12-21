@@ -1,5 +1,6 @@
 import ContainerText from "@/components/ContainerText";
 import Titles from "@/components/Titles";
+import Link from "next/link";
 
 interface Event {
   title: string;
@@ -8,6 +9,7 @@ interface Event {
   time: string;
   date: string;
   line?: boolean;
+  link: string;
 }
 
 const events: Event[] = [
@@ -18,6 +20,7 @@ const events: Event[] = [
     time: "4:00 PM - 9:00 PM",
     date: "Friday, January 31 / 2025",
     line: true,
+    link: "https://maps.app.goo.gl/1Nys12pUG53Yoxph7",
   },
   {
     title: "Wedding Ceremony",
@@ -26,6 +29,7 @@ const events: Event[] = [
     time: "4:00 PM",
     date: "Saturday, February 1 / 2025",
     line: true,
+    link: "https://maps.app.goo.gl/LbHxAVnKwniNNQNN8",
   },
   {
     title: "Ceremony Cocktail Party",
@@ -33,12 +37,13 @@ const events: Event[] = [
     dressCode: "Tuxedo / Smoking",
     time: "5:30 PM",
     date: "Saturday, February 1 / 2025",
+    link: "https://maps.app.goo.gl/XYrycruhUhacoVxi9",
   },
 ];
 
 const Itinerary = () => {
   return (
-    <section className="h-auto py-14 sm:py-32 bg-[#F0EBE0] flex flex-col items-center justify-center text-center px-5 text-sm md:text-lg">
+    <section className="h-auto py-14 sm:py-32 bg-[#f1f2ec] flex flex-col items-center justify-center text-center px-5 text-sm md:text-lg">
       <div className="mb-20">
         <Titles title="Itinerary" color="text-primaryGreen" size="large" />
       </div>
@@ -59,8 +64,16 @@ const Itinerary = () => {
                   <p className="tracking-[0.4rem]">{event.time}</p>
                 </div>
               </div>
-              <div className="flex flex-wrap justify-between w-full mt-10 italic text-primary/70">
-                <div>View Location</div>
+              <div className="flex flex-col justify-between w-full mt-10 italic lg:flex-row text-primary/70">
+                <div>
+                  <Link
+                    href={event.link}
+                    target="_blank"
+                    className="transition-all duration-300 hover:text-primaryGreen"
+                  >
+                    View Location
+                  </Link>
+                </div>
                 <div>{event.date}</div>
               </div>
             </div>

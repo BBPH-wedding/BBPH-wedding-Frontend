@@ -21,6 +21,7 @@ import {
   useFormModalStore,
   useReservationStore,
 } from "@/store/Store";
+import { useEffect } from "react";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -75,13 +76,19 @@ const Modal = () => {
     },
   });
 
+  useEffect(() => {
+    if (!isAuthModalOpen) {
+      formik.resetForm();
+    }
+  }, [isAuthModalOpen]);
+
   return (
     <>
       <Toaster />
       <Dialog open={isAuthModalOpen} onOpenChange={setIsAuthModalOpen}>
         <DialogTrigger asChild>
           <Button className="w-full" onClick={() => setIsAuthModalOpen(true)}>
-            Reserve
+            RESERVE
           </Button>
         </DialogTrigger>
         <DialogContent className="bg-[#F0EBE0] rounded-lg text-black">
@@ -112,7 +119,7 @@ const Modal = () => {
                 {...formik.getFieldProps("email")}
               />
               {formik.touched.email && formik.errors.email && (
-                <div className="mt-2 text-sm text-red-600">
+                <div className="absolute mt-2 text-sm text-red-600">
                   {formik.errors.email}
                 </div>
               )}
@@ -133,7 +140,7 @@ const Modal = () => {
                 {...formik.getFieldProps("password")}
               />
               {formik.touched.password && formik.errors.password && (
-                <div className="mt-2 text-sm text-red-600">
+                <div className="absolute mt-2 text-sm text-red-600">
                   {formik.errors.password}
                 </div>
               )}

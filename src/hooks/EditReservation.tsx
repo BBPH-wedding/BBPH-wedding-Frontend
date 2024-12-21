@@ -54,20 +54,15 @@ interface GetReservation {
   token: string;
 }
 
-export const GetReservation = async ({
-  email,
-  token,
-}: GetReservation) => {
+export const GetReservation = async ({ email, token }: GetReservation) => {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/reservations/${email}`,
       {
-        body: JSON.stringify({
-          email,
-        }),
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       }
     );
@@ -84,11 +79,31 @@ export const GetReservation = async ({
     }
 
     if (error instanceof Error) {
-      toast.error(error.message);
+      console.warn(error.message);
     } else {
       toast.error("Something went wrong");
     }
 
+    return null;
+  }
+};
+
+export const RequestPasswordReset = async (email: string) => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/reservations/request-reset/${email}`
+    );
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+      return null;
+    }
+
+    return response.text();
+  } catch (error) {
+    if (process.env.NODE_ENV === "development") {
+      console.warn("Error in RequestPasswordReset:", error);
+    }
     return null;
   }
 };
